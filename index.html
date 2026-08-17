@@ -12,7 +12,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="My Schedule">
   <link rel="icon" type="image/png" href="./ctu-logo.png">
-  <link rel="manifest" id="manifestLink">
+  <link rel="manifest" href="./manifest.json">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
@@ -3274,6 +3274,9 @@
           deferredPrompt = null;
           document.getElementById('pwaBanner').classList.remove('show');
         });
+      } else {
+        // Fallback instructions for mobile browser
+        showToast('Tip: Tap your browser menu (⋮ or Share) → "Add to Home screen" / "Install"');
       }
     }
 
@@ -3285,30 +3288,13 @@
     // Register Service Worker for offline PWA
     function registerSW() {
       if ('serviceWorker' in navigator) {
-        // Create inline service worker
-        const swCode = `
-          const CACHE = 'schedule-v2';
-          const ASSETS = ['./', './index.html', './ctu-logo.png'];
-          self.addEventListener('install', e => {
-            e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
-            self.skipWaiting();
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
+          .then(reg => {
+            // Service worker active
+          })
+          .catch(err => {
+            console.warn('SW registration error:', err);
           });
-          self.addEventListener('activate', e => {
-            e.waitUntil(clients.claim());
-          });
-          self.addEventListener('fetch', e => {
-            e.respondWith(
-              caches.match(e.request).then(r => r || fetch(e.request).then(resp => {
-                const clone = resp.clone();
-                caches.open(CACHE).then(c => c.put(e.request, clone));
-                return resp;
-              }))
-            );
-          });
-        `;
-        const blob = new Blob([swCode], { type: 'application/javascript' });
-        const swUrl = URL.createObjectURL(blob);
-        navigator.serviceWorker.register(swUrl).catch(() => { });
       }
     }
 
@@ -3893,7 +3879,6 @@
       } catch (e) { }
 
       // PWA
-      setupManifest();
       setupPWA();
       registerSW();
 
