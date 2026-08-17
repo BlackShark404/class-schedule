@@ -1444,6 +1444,9 @@
 
       document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(`view-${view}`).classList.add('active');
+
+      // Persist active tab offline via localStorage
+      try { localStorage.setItem('activeTab', view); } catch(e) {}
     }
 
     // ─── Init ───
@@ -1451,6 +1454,14 @@
       renderCards();
       highlightToday();
       buildTimetable();
+
+      // Restore persisted tab
+      try {
+        const saved = localStorage.getItem('activeTab');
+        if (saved && ['cards', 'timetable', 'fees'].includes(saved)) {
+          switchView(saved);
+        }
+      } catch(e) {}
     }
 
     init();
