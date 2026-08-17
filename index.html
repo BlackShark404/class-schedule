@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Schedule — Khen Sorela | BSIT 4</title>
+  <meta name="description" content="Class schedule for Khen Delgado Sorela, BSIT 4, 1st Semester SY 2026-2027, Cebu Technological University">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: rgba(255, 255, 255, 0.04);
+      --bg-card-hover: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-accent: rgba(255, 255, 255, 0.12);
+      --text-primary: #f0f0f5;
+      --text-secondary: #8888a0;
+      --text-muted: #55556a;
+      --accent-1: #6c5ce7;
+      --accent-2: #a29bfe;
+      --accent-3: #fd79a8;
+      --accent-4: #00cec9;
+      --accent-5: #ffeaa7;
+      --accent-6: #55efc4;
+      --gradient-1: linear-gradient(135deg, #6c5ce7, #a29bfe);
+      --gradient-2: linear-gradient(135deg, #fd79a8, #e17055);
+      --gradient-3: linear-gradient(135deg, #00cec9, #0984e3);
+      --gradient-4: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+      --gradient-5: linear-gradient(135deg, #55efc4, #00b894);
+      --gradient-6: linear-gradient(135deg, #e17055, #d63031);
+      --shadow-glow: 0 0 40px rgba(108, 92, 231, 0.15);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ─── Background Effects ─── */
+    .bg-effects {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.3;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .bg-orb:nth-child(1) {
+      width: 600px;
+      height: 600px;
+      background: var(--accent-1);
+      top: -200px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+
+    .bg-orb:nth-child(2) {
+      width: 500px;
+      height: 500px;
+      background: var(--accent-3);
+      bottom: -150px;
+      left: -100px;
+      animation-delay: -7s;
+    }
+
+    .bg-orb:nth-child(3) {
+      width: 400px;
+      height: 400px;
+      background: var(--accent-4);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -40px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(15px, 35px) scale(1.02); }
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── Layout ─── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      padding: 40px 0 20px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .uni-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px 8px 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 100px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      animation: fadeInDown 0.6s ease-out;
+    }
+
+    .uni-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .uni-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+    }
+
+    .semester-badge {
+      padding: 8px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-2);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      animation: fadeInDown 0.6s ease-out 0.1s both;
+    }
+
+    .hero {
+      margin-bottom: 16px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 .gradient-text {
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-sub-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .hero-sub-item .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-4);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ─── Navigation Tabs ─── */
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      margin-bottom: 32px;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
+      width: fit-content;
+    }
+
+    .nav-tab {
+      padding: 10px 24px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      background: none;
+      font-family: inherit;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .nav-tab.active {
+      background: var(--accent-1);
+      color: white;
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+    }
+
+    /* ─── View Sections ─── */
+    .view-section {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Stats Row ─── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .stat-card {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-2px);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-value.accent-1 { color: var(--accent-2); }
+    .stat-value.accent-2 { color: var(--accent-4); }
+    .stat-value.accent-3 { color: var(--accent-3); }
+    .stat-value.accent-4 { color: var(--accent-6); }
+
+    /* ─── Schedule Cards ─── */
+    .schedule-grid {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .schedule-card {
+      display: grid;
+      grid-template-columns: 4px 1fr;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    .schedule-card:nth-child(1) { animation-delay: 0.05s; }
+    .schedule-card:nth-child(2) { animation-delay: 0.1s; }
+    .schedule-card:nth-child(3) { animation-delay: 0.15s; }
+    .schedule-card:nth-child(4) { animation-delay: 0.2s; }
+    .schedule-card:nth-child(5) { animation-delay: 0.25s; }
+    .schedule-card:nth-child(6) { animation-delay: 0.3s; }
+
+    .schedule-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: translateX(4px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .card-accent {
+      border-radius: 4px 0 0 4px;
+    }
+
+    .card-content {
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .card-main {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      width: fit-content;
+      letter-spacing: 0.04em;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .card-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .card-meta-item svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0.6;
+    }
+
+    .card-units {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: var(--radius-md);
+      min-width: 70px;
+    }
+
+    .card-units-value {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .card-units-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    /* Color Themes */
+    .theme-purple .card-accent { background: var(--gradient-1); }
+    .theme-purple .card-code { background: rgba(108, 92, 231, 0.15); color: var(--accent-2); }
+
+    .theme-pink .card-accent { background: var(--gradient-2); }
+    .theme-pink .card-code { background: rgba(253, 121, 168, 0.15); color: var(--accent-3); }
+
+    .theme-teal .card-accent { background: var(--gradient-3); }
+    .theme-teal .card-code { background: rgba(0, 206, 201, 0.15); color: var(--accent-4); }
+
+    .theme-gold .card-accent { background: var(--gradient-4); }
+    .theme-gold .card-code { background: rgba(255, 234, 167, 0.15); color: var(--accent-5); }
+
+    .theme-green .card-accent { background: var(--gradient-5); }
+    .theme-green .card-code { background: rgba(85, 239, 196, 0.15); color: var(--accent-6); }
+
+    .theme-red .card-accent { background: var(--gradient-6); }
+    .theme-red .card-code { background: rgba(225, 112, 85, 0.15); color: #e17055; }
+
+    /* ─── Timetable Grid ─── */
+    .timetable-wrapper {
+      overflow-x: auto;
+      margin-bottom: 48px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .timetable {
+      min-width: 800px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .timetable thead th {
+      padding: 16px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.02);
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .timetable thead th:first-child {
+      text-align: right;
+      padding-right: 20px;
+      min-width: 90px;
+    }
+
+    .timetable tbody td {
+      padding: 4px;
+      border: 1px solid var(--border-subtle);
+      vertical-align: top;
+      height: 50px;
+      position: relative;
+    }
+
+    .timetable tbody td:first-child {
+      text-align: right;
+      padding: 12px 16px 12px 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-right: 1px solid var(--border-accent);
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    .timetable-block {
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      line-height: 1.4;
+      cursor: default;
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .timetable-block:hover {
+      transform: scale(1.02);
+      z-index: 5;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    .timetable-block .block-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .timetable-block .block-name {
+      font-weight: 500;
+      font-size: 10px;
+      opacity: 0.85;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .timetable-block .block-room {
+      font-size: 10px;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    /* Timetable block colors */
+    .block-purple {
+      background: linear-gradient(135deg, rgba(108, 92, 231, 0.3), rgba(162, 155, 254, 0.2));
+      border: 1px solid rgba(108, 92, 231, 0.4);
+      color: #c8c2ff;
+    }
+
+    .block-pink {
+      background: linear-gradient(135deg, rgba(253, 121, 168, 0.3), rgba(225, 112, 85, 0.2));
+      border: 1px solid rgba(253, 121, 168, 0.4);
+      color: #ffc2d4;
+    }
+
+    .block-teal {
+      background: linear-gradient(135deg, rgba(0, 206, 201, 0.3), rgba(9, 132, 227, 0.2));
+      border: 1px solid rgba(0, 206, 201, 0.4);
+      color: #a0fff9;
+    }
+
+    .block-gold {
+      background: linear-gradient(135deg, rgba(255, 234, 167, 0.3), rgba(253, 203, 110, 0.2));
+      border: 1px solid rgba(255, 234, 167, 0.3);
+      color: #fff3c4;
+    }
+
+    .block-green {
+      background: linear-gradient(135deg, rgba(85, 239, 196, 0.3), rgba(0, 184, 148, 0.2));
+      border: 1px solid rgba(85, 239, 196, 0.4);
+      color: #b2fce4;
+    }
+
+    .block-red {
+      background: linear-gradient(135deg, rgba(225, 112, 85, 0.3), rgba(214, 48, 49, 0.2));
+      border: 1px solid rgba(225, 112, 85, 0.4);
+      color: #ffbfb0;
+    }
+
+    /* ─── Fees Section ─── */
+    .fees-container {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .fees-list {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .fee-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.2s ease;
+    }
+
+    .fee-item:last-child {
+      border-bottom: none;
+    }
+
+    .fee-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .fee-name {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .fee-amount {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .fee-total {
+      background: rgba(108, 92, 231, 0.08) !important;
+    }
+
+    .fee-total .fee-name {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 15px;
+    }
+
+    .fee-total .fee-amount {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--accent-2);
+    }
+
+    .fees-summary {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .total-card {
+      padding: 32px;
+      background: var(--bg-card);
+      border: 1px solid rgba(108, 92, 231, 0.2);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .total-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-1);
+      opacity: 0.05;
+    }
+
+    .total-card-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .total-card-value {
+      font-size: 36px;
+      font-weight: 800;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      letter-spacing: -0.02em;
+    }
+
+    .total-card-currency {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      position: relative;
+    }
+
+    /* ─── Today Highlight ─── */
+    .today-section {
+      margin-bottom: 32px;
+      animation: fadeInUp 0.8s ease-out 0.35s both;
+    }
+
+    .today-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .today-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-6);
+      animation: pulse 2s ease-in-out infinite;
+      box-shadow: 0 0 10px rgba(85, 239, 196, 0.5);
+    }
+
+    .today-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-6);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .no-class-today {
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* ─── Day Filter Pills ─── */
+    .day-filter {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease-out 0.35s both;
+    }
+
+    .day-pill {
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .day-pill:hover {
+      color: var(--text-primary);
+      border-color: var(--border-accent);
+    }
+
+    .day-pill.active {
+      background: rgba(108, 92, 231, 0.15);
+      color: var(--accent-2);
+      border-color: rgba(108, 92, 231, 0.3);
+    }
+
+    .day-pill.today-pill {
+      position: relative;
+    }
+
+    .day-pill.today-pill::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-6);
+      box-shadow: 0 0 6px rgba(85, 239, 196, 0.6);
+    }
+
+    /* ─── Section Title ─── */
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border-subtle);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .footer-uni {
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    /* ─── Animations ─── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .header {
+        padding: 24px 0 16px;
+      }
+
+      .header-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .card-content {
+        grid-template-columns: 1fr;
+        padding: 16px;
+      }
+
+      .card-units {
+        flex-direction: row;
+        gap: 8px;
+        width: fit-content;
+      }
+
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .fees-container {
+        grid-template-columns: 1fr;
+      }
+
+      .fees-summary {
+        order: -1;
+      }
+
+      .nav-tabs {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-tab {
+        white-space: nowrap;
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 14px;
+      }
+
+      .stat-value {
+        font-size: 20px;
+      }
+
+      .card-meta {
+        gap: 12px;
+      }
+    }
+
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Effects -->
+  <div class="bg-effects">
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+  </div>
+  <div class="bg-grid"></div>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-top">
+        <div class="uni-badge">
+          <div class="uni-icon">C</div>
+          <span class="uni-name">Cebu Technological University — Main Campus</span>
+        </div>
+        <div class="semester-badge">1st Semester · SY 2026–2027</div>
+      </div>
+      <div class="hero">
+        <h1>
+          <span class="gradient-text">Class Schedule</span>
+        </h1>
+        <div class="hero-sub">
+          <div class="hero-sub-item">
+            <div class="dot"></div>
+            <span>Khen Delgado Sorela</span>
+          </div>
+          <div class="hero-sub-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 10 3 12 0v-5"/></svg>
+            <span>BSIT 4 · BSIT_DAY_IV-A</span>
+          </div>
+          <div class="hero-sub-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>ID: 1347782</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs" id="navTabs">
+      <button class="nav-tab active" data-view="cards" onclick="switchView('cards')">
+        📋 Subjects
+      </button>
+      <button class="nav-tab" data-view="timetable" onclick="switchView('timetable')">
+        📅 Timetable
+      </button>
+      <button class="nav-tab" data-view="fees" onclick="switchView('fees')">
+        💰 Fees
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Subjects</div>
+        <div class="stat-value accent-1">6</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Units</div>
+        <div class="stat-value accent-2">17</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Days</div>
+        <div class="stat-value accent-3">M–F</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Fees</div>
+        <div class="stat-value accent-4">₱7,030</div>
+      </div>
+    </div>
+
+    <!-- ═══════════ CARDS VIEW ═══════════ -->
+    <div class="view-section active" id="view-cards">
+
+      <!-- Today Section -->
+      <div class="today-section" id="todaySection"></div>
+
+      <!-- Day Filter -->
+      <div class="day-filter" id="dayFilter">
+        <button class="day-pill active" onclick="filterDay('all')">All</button>
+        <button class="day-pill" data-day="M" onclick="filterDay('M')">Monday</button>
+        <button class="day-pill" data-day="T" onclick="filterDay('T')">Tuesday</button>
+        <button class="day-pill" data-day="W" onclick="filterDay('W')">Wednesday</button>
+        <button class="day-pill" data-day="Th" onclick="filterDay('Th')">Thursday</button>
+        <button class="day-pill" data-day="F" onclick="filterDay('F')">Friday</button>
+      </div>
+
+      <div class="schedule-grid" id="scheduleGrid"></div>
+    </div>
+
+    <!-- ═══════════ TIMETABLE VIEW ═══════════ -->
+    <div class="view-section" id="view-timetable">
+      <h2 class="section-title">Weekly Timetable</h2>
+      <div class="timetable-wrapper">
+        <table class="timetable" id="timetableGrid">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+            </tr>
+          </thead>
+          <tbody id="timetableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══════════ FEES VIEW ═══════════ -->
+    <div class="view-section" id="view-fees">
+      <h2 class="section-title">Fee Breakdown</h2>
+      <div class="fees-container">
+        <div class="fees-list">
+          <div class="fee-item">
+            <span class="fee-name">Tuition (CCICT)</span>
+            <span class="fee-amount">₱2,550.00</span>
+          </div>
+          <div class="fee-item">
+            <span class="fee-name">Development Fee</span>
+            <span class="fee-amount">₱3,040.00</span>
+          </div>
+          <div class="fee-item">
+            <span class="fee-name">Computer Fee</span>
+            <span class="fee-amount">₱400.00</span>
+          </div>
+          <div class="fee-item">
+            <span class="fee-name">Library Fee</span>
+            <span class="fee-amount">₱350.00</span>
+          </div>
+          <div class="fee-item">
+            <span class="fee-name">Athletics Fee</span>
+            <span class="fee-amount">₱200.00</span>
+          </div>
+          <div class="fee-item">
+            <span class="fee-name">Medical and Dental Fee</span>
+            <span class="fee-amount">₱200.00</span>
+          </div>
+          <div class="fee-item">
+            <span class="fee-name">Cultural Fee</span>
+            <span class="fee-amount">₱150.00</span>
+          </div>
+          <div class="fee-item">
+            <span class="fee-name">Guidance Fee</span>
+            <span class="fee-amount">₱90.00</span>
+          </div>
+          <div class="fee-item">
+            <span class="fee-name">Registration Fee</span>
+            <span class="fee-amount">₱50.00</span>
+          </div>
+          <div class="fee-item fee-total">
+            <span class="fee-name">Total Charges</span>
+            <span class="fee-amount">₱7,030.00</span>
+          </div>
+        </div>
+        <div class="fees-summary">
+          <div class="total-card">
+            <div class="total-card-label">Total Charges</div>
+            <div class="total-card-value">7,030</div>
+            <div class="total-card-currency">Philippine Peso (₱)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Units</div>
+            <div class="stat-value accent-2">17.00</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Cost per Unit</div>
+            <div class="stat-value accent-3">₱413.53</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-uni">Cebu Technological University — Main Campus</div>
+      <div>M. J. Cuenco Avenue Cor. R. Palma Street, Cebu City, Philippines</div>
+    </footer>
+
+  </div>
+
+  <script>
+    // ─── Schedule Data ───
+    const subjects = [
+      {
+        section: 'CS199',
+        code: 'PC 4112',
+        name: 'Information Assurance and Security 2',
+        type: 'Lecture',
+        units: 2,
+        schedules: [
+          { time: '7:00 AM – 9:00 AM', day: 'M', dayFull: 'Monday', room: 'ST 302', startHour: 7, endHour: 9 }
+        ],
+        theme: 'purple',
+        blockClass: 'block-purple'
+      },
+      {
+        section: 'CS200',
+        code: 'PC 4112L',
+        name: 'Information Assurance and Security 2',
+        type: 'Laboratory',
+        units: 3,
+        schedules: [
+          { time: '7:00 AM – 10:00 AM', day: 'T', dayFull: 'Tuesday', room: 'IT 202', startHour: 7, endHour: 10 },
+          { time: '7:00 AM – 10:00 AM', day: 'W', dayFull: 'Wednesday', room: 'IT 202', startHour: 7, endHour: 10 },
+          { time: '7:00 AM – 10:00 AM', day: 'Th', dayFull: 'Thursday', room: 'IT 202', startHour: 7, endHour: 10 }
+        ],
+        theme: 'pink',
+        blockClass: 'block-pink'
+      },
+      {
+        section: 'CS201',
+        code: 'PC 4113',
+        name: 'Systems Administration and Maintenance',
+        type: '',
+        units: 3,
+        schedules: [
+          { time: '9:00 AM – 12:00 PM', day: 'M', dayFull: 'Monday', room: 'IT 402', startHour: 9, endHour: 12 },
+          { time: '10:00 AM – 12:00 PM', day: 'T', dayFull: 'Tuesday', room: 'IT 402', startHour: 10, endHour: 12 }
+        ],
+        theme: 'teal',
+        blockClass: 'block-teal'
+      },
+      {
+        section: 'CS202',
+        code: 'PC 4114',
+        name: 'Capstone Project and Research 2 (Technopreneurship 2)',
+        type: '',
+        units: 3,
+        schedules: [
+          { time: '10:00 AM – 12:00 PM', day: 'W', dayFull: 'Wednesday', room: 'ST 303', startHour: 10, endHour: 12 },
+          { time: '10:00 AM – 11:00 AM', day: 'Th', dayFull: 'Thursday', room: 'ST 303', startHour: 10, endHour: 11 }
+        ],
+        theme: 'gold',
+        blockClass: 'block-gold'
+      },
+      {
+        section: 'CS203',
+        code: 'P ELEC 4',
+        name: 'Professional Elective 4',
+        type: '',
+        units: 3,
+        schedules: [
+          { time: '1:00 PM – 3:00 PM', day: 'T', dayFull: 'Tuesday', room: 'IT 301', startHour: 13, endHour: 15 },
+          { time: '1:00 PM – 4:00 PM', day: 'W', dayFull: 'Wednesday', room: 'IT 301', startHour: 13, endHour: 16 }
+        ],
+        theme: 'green',
+        blockClass: 'block-green'
+      },
+      {
+        section: 'CS204',
+        code: 'AP 6',
+        name: 'Cross-Platform Script Development Technology',
+        type: '',
+        units: 3,
+        schedules: [
+          { time: '7:00 AM – 12:00 PM', day: 'F', dayFull: 'Friday', room: 'ST 301', startHour: 7, endHour: 12 }
+        ],
+        theme: 'red',
+        blockClass: 'block-red'
+      }
+    ];
+
+    const dayMap = { 'M': 1, 'T': 2, 'W': 3, 'Th': 4, 'F': 5 };
+    const dayNames = { 0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday' };
+    const dayShort = { 1: 'M', 2: 'T', 3: 'W', 4: 'Th', 5: 'F' };
+
+    // ─── SVG Icons ───
+    const icons = {
+      clock: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+      calendar: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+      pin: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
+    };
+
+    // ─── Render Schedule Cards ───
+    function renderCards(filter = 'all') {
+      const grid = document.getElementById('scheduleGrid');
+      grid.innerHTML = '';
+
+      subjects.forEach(sub => {
+        const matchingSchedules = filter === 'all'
+          ? sub.schedules
+          : sub.schedules.filter(s => s.day === filter);
+
+        if (matchingSchedules.length === 0) return;
+
+        matchingSchedules.forEach(sched => {
+          const card = document.createElement('div');
+          card.className = `schedule-card theme-${sub.theme}`;
+          card.setAttribute('data-days', sub.schedules.map(s => s.day).join(','));
+
+          const typeLabel = sub.type ? ` · ${sub.type}` : '';
+
+          card.innerHTML = `
+            <div class="card-accent"></div>
+            <div class="card-content">
+              <div class="card-main">
+                <div class="card-code">${sub.code}${typeLabel}</div>
+                <div class="card-title">${sub.name}</div>
+                <div class="card-meta">
+                  <div class="card-meta-item">
+                    ${icons.clock}
+                    <span>${sched.time}</span>
+                  </div>
+                  <div class="card-meta-item">
+                    ${icons.calendar}
+                    <span>${sched.dayFull}</span>
+                  </div>
+                  <div class="card-meta-item">
+                    ${icons.pin}
+                    <span>${sched.room}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-units">
+                <div class="card-units-value">${sub.units}</div>
+                <div class="card-units-label">Units</div>
+              </div>
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+      });
+    }
+
+    // ─── Filter by Day ───
+    function filterDay(day) {
+      document.querySelectorAll('.day-pill').forEach(pill => pill.classList.remove('active'));
+      if (day === 'all') {
+        document.querySelector('.day-pill:first-child').classList.add('active');
+      } else {
+        document.querySelector(`.day-pill[data-day="${day}"]`)?.classList.add('active');
+      }
+      renderCards(day);
+    }
+
+    // ─── Highlight Today ───
+    function highlightToday() {
+      const today = new Date().getDay();
+      const todayCode = dayShort[today];
+      const todaySection = document.getElementById('todaySection');
+
+      if (!todayCode) {
+        todaySection.innerHTML = `
+          <div class="today-header">
+            <div class="today-dot" style="background: var(--accent-5); box-shadow: 0 0 10px rgba(255, 234, 167, 0.5);"></div>
+            <div class="today-label" style="color: var(--accent-5);">Weekend — No Classes</div>
+          </div>
+          <div class="no-class-today">Enjoy your weekend! 🎉</div>
+        `;
+        return;
+      }
+
+      // Mark today pill
+      const todayPill = document.querySelector(`.day-pill[data-day="${todayCode}"]`);
+      if (todayPill) todayPill.classList.add('today-pill');
+
+      const todaySubjects = [];
+      subjects.forEach(sub => {
+        sub.schedules.forEach(sched => {
+          if (sched.day === todayCode) {
+            todaySubjects.push({ ...sub, currentSchedule: sched });
+          }
+        });
+      });
+
+      if (todaySubjects.length > 0) {
+        todaySubjects.sort((a, b) => a.currentSchedule.startHour - b.currentSchedule.startHour);
+        const nextClass = todaySubjects.find(s => {
+          const now = new Date();
+          return s.currentSchedule.endHour > now.getHours();
+        });
+
+        todaySection.innerHTML = `
+          <div class="today-header">
+            <div class="today-dot"></div>
+            <div class="today-label">Today · ${dayNames[today]} · ${todaySubjects.length} class${todaySubjects.length > 1 ? 'es' : ''}</div>
+          </div>
+        `;
+
+        if (nextClass) {
+          const now = new Date();
+          const isOngoing = nextClass.currentSchedule.startHour <= now.getHours() && nextClass.currentSchedule.endHour > now.getHours();
+          const statusText = isOngoing ? '🔴 Ongoing' : '⏳ Up Next';
+          todaySection.innerHTML += `
+            <div class="schedule-card theme-${nextClass.theme}" style="animation: none; border-color: rgba(85, 239, 196, 0.2);">
+              <div class="card-accent"></div>
+              <div class="card-content">
+                <div class="card-main">
+                  <div class="card-code">${statusText} · ${nextClass.code}</div>
+                  <div class="card-title">${nextClass.name}</div>
+                  <div class="card-meta">
+                    <div class="card-meta-item">${icons.clock}<span>${nextClass.currentSchedule.time}</span></div>
+                    <div class="card-meta-item">${icons.pin}<span>${nextClass.currentSchedule.room}</span></div>
+                  </div>
+                </div>
+                <div class="card-units">
+                  <div class="card-units-value">${nextClass.units}</div>
+                  <div class="card-units-label">Units</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      } else {
+        todaySection.innerHTML = `
+          <div class="today-header">
+            <div class="today-dot"></div>
+            <div class="today-label">Today · ${dayNames[today]}</div>
+          </div>
+          <div class="no-class-today">No classes today! 🎉</div>
+        `;
+      }
+    }
+
+    // ─── Build Timetable ───
+    function buildTimetable() {
+      const tbody = document.getElementById('timetableBody');
+      tbody.innerHTML = '';
+
+      // Build a grid from 7 AM to 4 PM
+      const startHour = 7;
+      const endHour = 16;
+      const days = ['M', 'T', 'W', 'Th', 'F'];
+      const dayIndex = { 'M': 0, 'T': 1, 'W': 2, 'Th': 3, 'F': 4 };
+
+      // Create occupied cells tracker
+      const occupied = {};
+      days.forEach(d => { occupied[d] = {}; });
+
+      // Pre-compute blocks
+      const blocks = [];
+      subjects.forEach(sub => {
+        sub.schedules.forEach(sched => {
+          blocks.push({
+            day: sched.day,
+            startHour: sched.startHour,
+            endHour: sched.endHour,
+            rowSpan: sched.endHour - sched.startHour,
+            code: sub.code,
+            name: sub.name,
+            room: sched.room,
+            blockClass: sub.blockClass
+          });
+          for (let h = sched.startHour; h < sched.endHour; h++) {
+            occupied[sched.day][h] = true;
+          }
+        });
+      });
+
+      for (let hour = startHour; hour < endHour; hour++) {
+        const tr = document.createElement('tr');
+
+        // Time cell
+        const timeTd = document.createElement('td');
+        const period = hour >= 12 ? 'PM' : 'AM';
+        const displayHour = hour > 12 ? hour - 12 : hour;
+        timeTd.textContent = `${displayHour}:00 ${period}`;
+        tr.appendChild(timeTd);
+
+        // Day cells
+        days.forEach(day => {
+          // Check if this cell is occupied by a rowspan from above
+          if (occupied[day][hour]) {
+            // Check if this is a start of a block
+            const block = blocks.find(b => b.day === day && b.startHour === hour);
+            if (block) {
+              const td = document.createElement('td');
+              td.rowSpan = block.rowSpan;
+              td.innerHTML = `
+                <div class="timetable-block ${block.blockClass}">
+                  <div class="block-code">${block.code}</div>
+                  <div class="block-name">${block.name}</div>
+                  <div class="block-room">📍 ${block.room}</div>
+                </div>
+              `;
+              tr.appendChild(td);
+            }
+            // If occupied but not a start, skip (covered by rowspan)
+          } else {
+            const td = document.createElement('td');
+            tr.appendChild(td);
+          }
+        });
+
+        tbody.appendChild(tr);
+      }
+    }
+
+    // ─── View Switching ───
+    function switchView(view) {
+      document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelector(`[data-view="${view}"]`).classList.add('active');
+
+      document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(`view-${view}`).classList.add('active');
+    }
+
+    // ─── Init ───
+    function init() {
+      renderCards();
+      highlightToday();
+      buildTimetable();
+    }
+
+    init();
+  </script>
+</body>
+</html>
