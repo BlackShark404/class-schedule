@@ -806,6 +806,208 @@
       color: #e17055;
     }
 
+    /* ─── Mode Toggle (F2F / Online) ─── */
+    .card-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 100px;
+      padding: 3px;
+      gap: 2px;
+      position: relative;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+
+    html.light .mode-toggle {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .mode-btn {
+      border: none;
+      background: transparent;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .mode-btn svg {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.25s ease;
+    }
+
+    .mode-btn:hover:not(.active) {
+      color: var(--text-primary);
+    }
+
+    .mode-btn.active.f2f {
+      background: rgba(85, 239, 196, 0.18);
+      color: var(--accent-6);
+      box-shadow: 0 2px 8px rgba(85, 239, 196, 0.15);
+    }
+
+    html.light .mode-btn.active.f2f {
+      background: rgba(0, 184, 148, 0.15);
+      color: #00876c;
+    }
+
+    .mode-btn.active.online {
+      background: rgba(0, 206, 201, 0.2);
+      color: var(--accent-4);
+      box-shadow: 0 2px 10px rgba(0, 206, 201, 0.25);
+    }
+
+    html.light .mode-btn.active.online {
+      background: rgba(9, 132, 227, 0.15);
+      color: #0984e3;
+    }
+
+    /* Card state when Online */
+    .schedule-card.mode-online {
+      border-color: rgba(0, 206, 201, 0.3);
+      background: linear-gradient(135deg, rgba(0, 206, 201, 0.04) 0%, var(--bg-card) 100%);
+    }
+
+    .card-meta-online {
+      color: var(--accent-4) !important;
+    }
+
+    .card-meta-online svg {
+      opacity: 1 !important;
+      color: var(--accent-4);
+    }
+
+    .online-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: var(--accent-4);
+    }
+
+    .room-hint {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    /* Timetable Mode Badge */
+    .timetable-mode-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-top: 3px;
+      width: fit-content;
+    }
+
+    .timetable-mode-badge svg {
+      width: 9px;
+      height: 9px;
+    }
+
+    .timetable-mode-badge.online {
+      background: rgba(0, 206, 201, 0.25);
+      color: #00cec9;
+      border: 1px solid rgba(0, 206, 201, 0.45);
+      box-shadow: 0 0 8px rgba(0, 206, 201, 0.2);
+    }
+
+    html.light .timetable-mode-badge.online {
+      background: rgba(9, 132, 227, 0.18);
+      color: #0984e3;
+      border-color: rgba(9, 132, 227, 0.35);
+    }
+
+    .timetable-mode-badge.f2f {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    html.light .timetable-mode-badge.f2f {
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--text-secondary);
+    }
+
+    .timetable-block.is-online {
+      box-shadow: inset 0 0 0 1px rgba(0, 206, 201, 0.45), 0 0 12px rgba(0, 206, 201, 0.15);
+    }
+
+    /* Hybrid Summary Badge in filter bar */
+    .hybrid-summary-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-left: auto;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      white-space: nowrap;
+      transition: all 0.3s ease;
+    }
+
+    html.light .hybrid-summary-badge {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .badge-dot.f2f {
+      background: var(--accent-6);
+      box-shadow: 0 0 6px rgba(85, 239, 196, 0.6);
+    }
+
+    .badge-dot.online {
+      background: var(--accent-4);
+      box-shadow: 0 0 6px rgba(0, 206, 201, 0.6);
+    }
+
+    .badge-dot.hybrid {
+      background: var(--accent-2);
+      box-shadow: 0 0 6px rgba(162, 155, 254, 0.6);
+    }
+
+    .mode-tag-online {
+      color: var(--accent-4);
+      font-weight: 600;
+    }
+
     /* ─── Timetable Grid ─── */
     .timetable-wrapper {
       overflow-x: auto;
@@ -1773,6 +1975,7 @@
         <button class="day-pill" data-day="W" onclick="filterDay('W')">Wednesday</button>
         <button class="day-pill" data-day="Th" onclick="filterDay('Th')">Thursday</button>
         <button class="day-pill" data-day="F" onclick="filterDay('F')">Friday</button>
+        <div class="hybrid-summary-badge" id="hybridSummaryBadge"></div>
       </div>
 
       <div class="schedule-grid" id="scheduleGrid"></div>
@@ -1963,7 +2166,10 @@
     const icons = {
       clock: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
       calendar: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
-      pin: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
+      pin: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+      school: '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg>',
+      globe: '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+      video: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>'
     };
 
     // ─── Toast ───
@@ -2018,6 +2224,67 @@
     }
 
     // ═══════════════════════════════════════
+    //  HYBRID MODE (F2F / ONLINE) STATE
+    // ═══════════════════════════════════════
+    let currentDayFilter = 'all';
+
+    function getSubjectModes() {
+      try {
+        const data = localStorage.getItem('subject_modes');
+        return data ? JSON.parse(data) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function getSubjectMode(code) {
+      const modes = getSubjectModes();
+      return modes[code] || 'f2f';
+    }
+
+    function setSubjectMode(code, mode, event) {
+      if (event) {
+        event.stopPropagation();
+      }
+      const modes = getSubjectModes();
+      modes[code] = mode;
+      try {
+        localStorage.setItem('subject_modes', JSON.stringify(modes));
+      } catch (e) { }
+
+      const modeLabel = mode === 'online' ? '🌐 Online mode' : '🏫 Face-to-Face (F2F) mode';
+      showToast(`${code}: Switched to ${modeLabel}`);
+
+      renderCards(currentDayFilter);
+      highlightToday();
+      buildTimetable();
+      updateCountdown();
+      updateHybridSummary();
+    }
+
+    function updateHybridSummary() {
+      const modes = getSubjectModes();
+      let onlineCount = 0;
+      let f2fCount = 0;
+      subjects.forEach(sub => {
+        const mode = modes[sub.code] || 'f2f';
+        if (mode === 'online') onlineCount++;
+        else f2fCount++;
+      });
+
+      const badge = document.getElementById('hybridSummaryBadge');
+      if (badge) {
+        if (onlineCount > 0 && f2fCount > 0) {
+          badge.innerHTML = `<span class="badge-dot hybrid"></span>${f2fCount} F2F · ${onlineCount} Online`;
+        } else if (onlineCount > 0) {
+          badge.innerHTML = `<span class="badge-dot online"></span>All Online (${onlineCount})`;
+        } else {
+          badge.innerHTML = `<span class="badge-dot f2f"></span>All F2F (${f2fCount})`;
+        }
+      }
+    }
+
+    // ═══════════════════════════════════════
     //  LIVE COUNTDOWN TIMER
     // ═══════════════════════════════════════
     function getTodaySchedules() {
@@ -2027,6 +2294,7 @@
 
       const result = [];
       subjects.forEach(sub => {
+        const mode = getSubjectMode(sub.code);
         sub.schedules.forEach(sched => {
           if (sched.day === todayCode) {
             result.push({
@@ -2038,7 +2306,8 @@
               startMin: sched.startMin || 0,
               endHour: sched.endHour,
               endMin: sched.endMin || 0,
-              theme: sub.theme
+              theme: sub.theme,
+              mode: mode
             });
           }
         });
@@ -2078,13 +2347,17 @@
         const h = Math.floor(diff / 60);
         const m = diff % 60;
         const s = 59 - now.getSeconds();
+        const isOnline = ongoing.mode === 'online';
+        const locDetail = isOnline 
+          ? `<span class="mode-tag-online">🌐 Online Class (${ongoing.room})</span>`
+          : `${ongoing.room}`;
 
         banner.className = 'countdown-banner ongoing';
         banner.innerHTML = `
           <div class="countdown-left">
             <div class="countdown-status ongoing">${svgIcons.pulse} In Progress</div>
             <div class="countdown-class-name">${ongoing.name}</div>
-            <div class="countdown-class-detail">${ongoing.code} · ${ongoing.room} · Ends at ${formatHour(ongoing.endHour, ongoing.endMin)}</div>
+            <div class="countdown-class-detail">${ongoing.code} · ${locDetail} · Ends at ${formatHour(ongoing.endHour, ongoing.endMin)}</div>
           </div>
           <div class="countdown-timer">
             <div class="countdown-unit">
@@ -2120,13 +2393,17 @@
         const s = now.getSeconds() > 0 ? 60 - now.getSeconds() : 0;
         const mAdj = m < 0 ? m + 60 : m;
         const hAdj = m < 0 ? h - 1 : h;
+        const isOnline = upcoming.mode === 'online';
+        const locDetail = isOnline 
+          ? `<span class="mode-tag-online">🌐 Online Class (${upcoming.room})</span>`
+          : `${upcoming.room}`;
 
         banner.className = 'countdown-banner upcoming';
         banner.innerHTML = `
           <div class="countdown-left">
             <div class="countdown-status upcoming">${svgIcons.hourglass} Up Next</div>
             <div class="countdown-class-name">${upcoming.name}</div>
-            <div class="countdown-class-detail">${upcoming.code} · ${upcoming.room} · Starts at ${formatHour(upcoming.startHour, upcoming.startMin)}</div>
+            <div class="countdown-class-detail">${upcoming.code} · ${locDetail} · Starts at ${formatHour(upcoming.startHour, upcoming.startMin)}</div>
           </div>
           <div class="countdown-timer">
             <div class="countdown-unit">
@@ -2210,8 +2487,10 @@
         // Notify 15 minutes before
         if (diff > 0 && diff <= 15 && !notifiedClasses.has(key)) {
           notifiedClasses.add(key);
+          const isOnline = sched.mode === 'online';
+          const locText = isOnline ? '🌐 Online Class' : `📍 ${sched.room}`;
           new Notification(`${sched.name}`, {
-            body: `Starts in ${diff} min · ${sched.room} · ${sched.time}`,
+            body: `Starts in ${diff} min · ${locText} · ${sched.time}`,
             icon: undefined,
             tag: key,
             requireInteraction: false
@@ -2315,6 +2594,7 @@
 
     // ─── Render Schedule Cards ───
     function renderCards(filter = 'all') {
+      currentDayFilter = filter;
       const grid = document.getElementById('scheduleGrid');
       grid.innerHTML = '';
 
@@ -2325,9 +2605,12 @@
 
         if (matchingSchedules.length === 0) return;
 
+        const mode = getSubjectMode(sub.code);
+        const isF2F = mode === 'f2f';
+
         matchingSchedules.forEach(sched => {
           const card = document.createElement('div');
-          card.className = `schedule-card theme-${sub.theme}`;
+          card.className = `schedule-card theme-${sub.theme} mode-${mode}`;
           card.setAttribute('data-days', sub.schedules.map(s => s.day).join(','));
 
           const typeLabel = sub.type ? ` · ${sub.type}` : '';
@@ -2336,7 +2619,17 @@
             <div class="card-accent"></div>
             <div class="card-content">
               <div class="card-main">
-                <div class="card-code">${sub.code}${typeLabel}</div>
+                <div class="card-top-row">
+                  <div class="card-code">${sub.code}${typeLabel}</div>
+                  <div class="mode-toggle" role="group" aria-label="Class Mode">
+                    <button type="button" class="mode-btn f2f ${isF2F ? 'active' : ''}" onclick="setSubjectMode('${sub.code}', 'f2f', event)" title="Set to Face-to-Face (F2F)">
+                      ${icons.school}<span>F2F</span>
+                    </button>
+                    <button type="button" class="mode-btn online ${!isF2F ? 'active' : ''}" onclick="setSubjectMode('${sub.code}', 'online', event)" title="Set to Online">
+                      ${icons.globe}<span>Online</span>
+                    </button>
+                  </div>
+                </div>
                 <div class="card-title">${sub.name}</div>
                 <div class="card-meta">
                   <div class="card-meta-item">
@@ -2347,10 +2640,17 @@
                     ${icons.calendar}
                     <span>${sched.dayFull}</span>
                   </div>
-                  <div class="card-meta-item">
-                    ${icons.pin}
-                    <span>${sched.room}</span>
-                  </div>
+                  ${isF2F ? `
+                    <div class="card-meta-item">
+                      ${icons.pin}
+                      <span>${sched.room}</span>
+                    </div>
+                  ` : `
+                    <div class="card-meta-item card-meta-online">
+                      ${icons.video}
+                      <span class="online-label">Online Class <span class="room-hint">(${sched.room})</span></span>
+                    </div>
+                  `}
                 </div>
               </div>
               <div class="card-units">
@@ -2367,6 +2667,7 @@
 
     // ─── Filter by Day ───
     function filterDay(day) {
+      currentDayFilter = day;
       document.querySelectorAll('.day-pill').forEach(pill => pill.classList.remove('active'));
       if (day === 'all') {
         document.querySelector('.day-pill:first-child').classList.add('active');
@@ -2401,7 +2702,7 @@
       subjects.forEach(sub => {
         sub.schedules.forEach(sched => {
           if (sched.day === todayCode) {
-            todaySubjects.push({ ...sub, currentSchedule: sched });
+            todaySubjects.push({ ...sub, currentSchedule: sched, mode: getSubjectMode(sub.code) });
           }
         });
       });
@@ -2424,16 +2725,32 @@
           const now = new Date();
           const isOngoing = nextClass.currentSchedule.startHour <= now.getHours() && nextClass.currentSchedule.endHour > now.getHours();
           const statusText = isOngoing ? `${svgIcons.pulse} Ongoing` : `${svgIcons.hourglass} Up Next`;
+          const isF2F = nextClass.mode === 'f2f';
+
           todaySection.innerHTML += `
-            <div class="schedule-card theme-${nextClass.theme}" style="animation: none; border-color: rgba(85, 239, 196, 0.2);">
+            <div class="schedule-card theme-${nextClass.theme} mode-${nextClass.mode}" style="animation: none; border-color: rgba(85, 239, 196, 0.2);">
               <div class="card-accent"></div>
               <div class="card-content">
                 <div class="card-main">
-                  <div class="card-code">${statusText} · ${nextClass.code}</div>
+                  <div class="card-top-row">
+                    <div class="card-code">${statusText} · ${nextClass.code}</div>
+                    <div class="mode-toggle" role="group" aria-label="Class Mode">
+                      <button type="button" class="mode-btn f2f ${isF2F ? 'active' : ''}" onclick="setSubjectMode('${nextClass.code}', 'f2f', event)" title="Set to Face-to-Face">
+                        ${icons.school}<span>F2F</span>
+                      </button>
+                      <button type="button" class="mode-btn online ${!isF2F ? 'active' : ''}" onclick="setSubjectMode('${nextClass.code}', 'online', event)" title="Set to Online">
+                        ${icons.globe}<span>Online</span>
+                      </button>
+                    </div>
+                  </div>
                   <div class="card-title">${nextClass.name}</div>
                   <div class="card-meta">
                     <div class="card-meta-item">${icons.clock}<span>${nextClass.currentSchedule.time}</span></div>
-                    <div class="card-meta-item">${icons.pin}<span>${nextClass.currentSchedule.room}</span></div>
+                    ${isF2F ? `
+                      <div class="card-meta-item">${icons.pin}<span>${nextClass.currentSchedule.room}</span></div>
+                    ` : `
+                      <div class="card-meta-item card-meta-online">${icons.video}<span class="online-label">Online Class <span class="room-hint">(${nextClass.currentSchedule.room})</span></span></div>
+                    `}
                   </div>
                 </div>
                 <div class="card-units">
@@ -2473,6 +2790,7 @@
       // Pre-compute blocks
       const blocks = [];
       subjects.forEach(sub => {
+        const mode = getSubjectMode(sub.code);
         sub.schedules.forEach(sched => {
           blocks.push({
             day: sched.day,
@@ -2482,7 +2800,8 @@
             code: sub.code,
             name: sub.name,
             room: sched.room,
-            blockClass: sub.blockClass
+            blockClass: sub.blockClass,
+            mode: mode
           });
           for (let h = sched.startHour; h < sched.endHour; h++) {
             occupied[sched.day][h] = true;
@@ -2509,11 +2828,15 @@
             if (block) {
               const td = document.createElement('td');
               td.rowSpan = block.rowSpan;
+              const isOnline = block.mode === 'online';
               td.innerHTML = `
-                <div class="timetable-block ${block.blockClass}">
+                <div class="timetable-block ${block.blockClass} ${isOnline ? 'is-online' : ''}">
                   <div class="block-code">${block.code}</div>
                   <div class="block-name">${block.name}</div>
-                  <div class="block-room">${svgIcons.mapPin} ${block.room}</div>
+                  <div class="timetable-mode-badge ${isOnline ? 'online' : 'f2f'}">
+                    ${isOnline ? icons.globe + ' Online' : icons.school + ' F2F'}
+                  </div>
+                  <div class="block-room">${isOnline ? icons.video + ' Online' : svgIcons.mapPin + ' ' + block.room}</div>
                 </div>
               `;
               tr.appendChild(td);
@@ -2562,6 +2885,7 @@
       highlightToday();
       buildTimetable();
       updateCountdown();
+      updateHybridSummary();
 
       // Restore persisted tab
       try {
