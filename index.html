@@ -1099,18 +1099,24 @@
       border-radius: var(--radius-sm);
       font-size: 11px;
       line-height: 1.4;
-      cursor: default;
-      transition: all 0.3s ease;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .timetable-block:hover {
-      transform: scale(1.02);
+      transform: translateY(-2px) scale(1.02);
       z-index: 5;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .timetable-block:active {
+      transform: scale(0.97);
     }
 
     .timetable-block .block-code {
@@ -1828,6 +1834,245 @@
       background: var(--scrollbar-hover);
     }
 
+    /* ─── Timetable Detail Modal ─── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-dialog {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      transform: scale(0.92) translateY(12px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .modal-backdrop.open .modal-dialog {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-top-accent {
+      height: 4px;
+      background: var(--gradient-1);
+    }
+
+    .modal-dialog.theme-purple .modal-top-accent { background: linear-gradient(90deg, #6c5ce7, #a29bfe); }
+    .modal-dialog.theme-pink .modal-top-accent { background: linear-gradient(90deg, #fd79a8, #e17055); }
+    .modal-dialog.theme-teal .modal-top-accent { background: linear-gradient(90deg, #00cec9, #81ecec); }
+    .modal-dialog.theme-gold .modal-top-accent { background: linear-gradient(90deg, #ffb300, #ffeaa7); }
+    .modal-dialog.theme-green .modal-top-accent { background: linear-gradient(90deg, #00b894, #55efc4); }
+    .modal-dialog.theme-red .modal-top-accent { background: linear-gradient(90deg, #e17055, #fab1a0); }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .modal-code-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      border: 1px solid var(--border-accent);
+    }
+
+    html.light .modal-code-badge {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    html.light .modal-close-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--text-primary);
+      transform: rotate(90deg);
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.35;
+      margin-bottom: 16px;
+    }
+
+    .modal-mode-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 18px;
+    }
+
+    .modal-mode-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .modal-info-card {
+      padding: 10px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+    }
+
+    .modal-info-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal-info-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .modal-action-btn {
+      padding: 10px 18px;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .modal-action-btn.secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    html.light .modal-action-btn.secondary {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-action-btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text-primary);
+    }
+
+    .modal-action-btn.primary {
+      background: var(--gradient-1);
+      color: white;
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+    }
+
+    .modal-action-btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(108, 92, 231, 0.6);
+    }
+
+    @media (max-width: 600px) {
+      .modal-backdrop {
+        align-items: flex-end;
+        padding: 0;
+      }
+
+      .modal-dialog {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        max-width: 100%;
+        transform: translateY(100%);
+      }
+
+      .modal-backdrop.open .modal-dialog {
+        transform: translateY(0);
+      }
+
+      .modal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ─── Toast Notification ─── */
     .toast {
       position: fixed;
@@ -2111,6 +2356,11 @@
       <div>M. J. Cuenco Avenue Cor. R. Palma Street, Cebu City, Philippines</div>
     </footer>
 
+  </div>
+
+  <!-- Timetable Detail Modal -->
+  <div class="modal-backdrop" id="timetableModalBackdrop" onclick="if(event.target===this)closeTimetableModal()">
+    <div class="modal-dialog" id="timetableModalDialog" role="dialog" aria-modal="true"></div>
   </div>
 
   <!-- Toast -->
@@ -2870,7 +3120,11 @@
               td.rowSpan = block.rowSpan;
               const isOnline = block.mode === 'online';
               td.innerHTML = `
-                <div class="timetable-block ${block.blockClass} ${isOnline ? 'is-online' : ''}">
+                <div class="timetable-block ${block.blockClass} ${isOnline ? 'is-online' : ''}" 
+                     onclick="openTimetableModal('${block.code}', '${block.day}')" 
+                     role="button" 
+                     tabindex="0" 
+                     title="Tap to view full class details">
                   <div class="block-code">${block.code}</div>
                   <div class="block-name">${block.name}</div>
                   <div class="timetable-mode-badge ${isOnline ? 'online' : 'f2f'}">
@@ -2891,6 +3145,140 @@
         tbody.appendChild(tr);
       }
     }
+
+    // ─── Timetable Detail Modal ───
+    let currentModalSubjectCode = null;
+    let currentModalDay = null;
+
+    function openTimetableModal(code, day) {
+      const sub = subjects.find(s => s.code === code);
+      if (!sub) return;
+
+      const sched = sub.schedules.find(s => s.day === day) || sub.schedules[0];
+      currentModalSubjectCode = code;
+      currentModalDay = day;
+
+      const mode = getSubjectMode(code);
+      const isOnline = mode === 'online';
+      const durationHours = sched.endHour - sched.startHour;
+
+      const dialog = document.getElementById('timetableModalDialog');
+      dialog.className = `modal-dialog theme-${sub.theme}`;
+
+      dialog.innerHTML = `
+        <div class="modal-top-accent"></div>
+        <div class="modal-body">
+          <div class="modal-header">
+            <div class="modal-code-badge">
+              <span>${sub.code}</span>
+              <span>·</span>
+              <span>${sub.section || 'BSIT 4'}</span>
+            </div>
+            <button class="modal-close-btn" onclick="closeTimetableModal()" title="Close (Esc)" aria-label="Close">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <div class="modal-title">${sub.name}</div>
+
+          <div class="modal-mode-banner">
+            <div class="modal-mode-label">
+              ${isOnline ? icons.globe : icons.school}
+              <span>Class Delivery Mode</span>
+            </div>
+            <div class="mode-toggle" role="group" aria-label="Class Mode">
+              <button type="button" class="mode-btn f2f ${!isOnline ? 'active' : ''}" onclick="toggleModalSubjectMode('${sub.code}', 'f2f')">
+                ${icons.school}<span>F2F</span>
+              </button>
+              <button type="button" class="mode-btn online ${isOnline ? 'active' : ''}" onclick="toggleModalSubjectMode('${sub.code}', 'online')">
+                ${icons.globe}<span>Online</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="modal-grid">
+            <div class="modal-info-card">
+              <div class="modal-info-label">
+                ${icons.calendar} Day
+              </div>
+              <div class="modal-info-value">${sched.dayFull}</div>
+            </div>
+
+            <div class="modal-info-card">
+              <div class="modal-info-label">
+                ${icons.clock} Time
+              </div>
+              <div class="modal-info-value">${sched.time} (${durationHours} hrs)</div>
+            </div>
+
+            <div class="modal-info-card">
+              <div class="modal-info-label">
+                ${isOnline ? icons.video : icons.pin} Location
+              </div>
+              <div class="modal-info-value">
+                ${isOnline ? '<span class="mode-tag-online">🌐 Online (' + sched.room + ')</span>' : sched.room}
+              </div>
+            </div>
+
+            <div class="modal-info-card">
+              <div class="modal-info-label">
+                ${svgIcons.hourglass} Units & Type
+              </div>
+              <div class="modal-info-value">${sub.units} Units · ${sub.type || 'Lecture'}</div>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="modal-action-btn secondary" onclick="closeTimetableModal()">Close</button>
+            <button class="modal-action-btn primary" onclick="jumpToSubjectInCards('${sub.code}', '${sched.day}')">
+              View in Cards View →
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('timetableModalBackdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function toggleModalSubjectMode(code, mode) {
+      setSubjectMode(code, mode);
+      openTimetableModal(code, currentModalDay);
+    }
+
+    function closeTimetableModal() {
+      const backdrop = document.getElementById('timetableModalBackdrop');
+      if (backdrop) backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function jumpToSubjectInCards(code, day) {
+      closeTimetableModal();
+      switchView('cards');
+      filterDay(day);
+      setTimeout(() => {
+        const target = Array.from(document.querySelectorAll('.schedule-card')).find(c => c.innerText.includes(code));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.transition = 'box-shadow 0.4s, transform 0.4s';
+          target.style.transform = 'scale(1.02)';
+          target.style.boxShadow = '0 0 30px rgba(108, 92, 231, 0.6)';
+          setTimeout(() => {
+            target.style.transform = '';
+            target.style.boxShadow = '';
+          }, 1500);
+        }
+      }, 150);
+    }
+
+    // Modal keyboard listener
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeTimetableModal();
+    });
 
     // ─── View Switching ───
     function switchView(view) {
