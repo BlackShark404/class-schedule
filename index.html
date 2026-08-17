@@ -257,6 +257,26 @@
       position: relative;
     }
 
+    .theme-toggle svg, .notif-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .countdown-status svg {
+      vertical-align: -2px;
+      margin-right: 2px;
+    }
+
+    .toast svg {
+      vertical-align: -3px;
+      margin-right: 4px;
+    }
+
+    .block-room svg {
+      vertical-align: -1px;
+      margin-right: 1px;
+    }
+
     .theme-toggle:hover, .notif-toggle:hover {
       background: var(--bg-card-hover);
       border-color: var(--border-accent);
@@ -1314,7 +1334,7 @@
     <!-- PWA Install Banner -->
     <div class="pwa-banner" id="pwaBanner">
       <div class="pwa-banner-text">
-        <span>📱</span>
+        <span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
         <span>Install this schedule on your home screen for quick access!</span>
       </div>
       <div class="pwa-banner-actions">
@@ -1335,10 +1355,10 @@
         </div>
         <div class="header-controls">
           <button class="notif-toggle" id="notifToggle" onclick="toggleNotifications()" title="Class Reminders">
-            🔔
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           </button>
           <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode">
-            🌙
+            <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           </button>
         </div>
       </div>
@@ -1369,13 +1389,13 @@
     <!-- Navigation Tabs -->
     <div class="nav-tabs" id="navTabs">
       <button class="nav-tab active" data-view="cards" onclick="switchView('cards')">
-        📋 Subjects
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Subjects
       </button>
       <button class="nav-tab" data-view="timetable" onclick="switchView('timetable')">
-        📅 Timetable
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Timetable
       </button>
       <button class="nav-tab" data-view="fees" onclick="switchView('fees')">
-        💰 Fees
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Fees
       </button>
     </div>
 
@@ -1617,18 +1637,33 @@
     // ═══════════════════════════════════════
     //  THEME TOGGLE (Light / Dark)
     // ═══════════════════════════════════════
+    const svgIcons = {
+      moon: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+      sun: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+      bellOn: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>',
+      bellOff: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M18.63 13A17.89 17.89 0 0 1 18 8"/><path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"/><path d="M18 8a6 6 0 0 0-9.33-5"/><line x1="1" y1="1" x2="23" y2="23"/></svg>',
+      pulse: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="6" fill="currentColor" opacity="0.3"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>',
+      hourglass: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>',
+      check: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+      party: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+      warn: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+      mapPin: '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+      book: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+      download: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
+    };
+
     function applyTheme(theme) {
       const html = document.documentElement;
       const toggle = document.getElementById('themeToggle');
       const meta = document.querySelector('meta[name="theme-color"]');
       if (theme === 'light') {
         html.classList.add('light');
-        toggle.textContent = '☀️';
+        toggle.innerHTML = svgIcons.sun;
         toggle.title = 'Switch to Dark Mode';
         if (meta) meta.content = '#f5f5fa';
       } else {
         html.classList.remove('light');
-        toggle.textContent = '🌙';
+        toggle.innerHTML = svgIcons.moon;
         toggle.title = 'Switch to Light Mode';
         if (meta) meta.content = '#0a0a0f';
       }
@@ -1639,7 +1674,7 @@
       const newTheme = isLight ? 'dark' : 'light';
       applyTheme(newTheme);
       try { localStorage.setItem('theme', newTheme); } catch(e) {}
-      showToast(newTheme === 'light' ? '☀️ Light mode' : '🌙 Dark mode');
+      showToast(newTheme === 'light' ? `${svgIcons.sun} Light mode` : `${svgIcons.moon} Dark mode`);
     }
 
     // ═══════════════════════════════════════
@@ -1682,7 +1717,7 @@
         banner.className = 'countdown-banner';
         banner.innerHTML = `
           <div class="countdown-left">
-            <div class="countdown-status free">🎉 Free Day</div>
+            <div class="countdown-status free">${svgIcons.party} Free Day</div>
             <div class="countdown-class-name">No classes scheduled today</div>
             <div class="countdown-class-detail">Enjoy your day off!</div>
           </div>
@@ -1707,7 +1742,7 @@
         banner.className = 'countdown-banner ongoing';
         banner.innerHTML = `
           <div class="countdown-left">
-            <div class="countdown-status ongoing">🔴 In Progress</div>
+            <div class="countdown-status ongoing">${svgIcons.pulse} In Progress</div>
             <div class="countdown-class-name">${ongoing.name}</div>
             <div class="countdown-class-detail">${ongoing.code} · ${ongoing.room} · Ends at ${formatHour(ongoing.endHour, ongoing.endMin)}</div>
           </div>
@@ -1749,7 +1784,7 @@
         banner.className = 'countdown-banner upcoming';
         banner.innerHTML = `
           <div class="countdown-left">
-            <div class="countdown-status upcoming">⏳ Up Next</div>
+            <div class="countdown-status upcoming">${svgIcons.hourglass} Up Next</div>
             <div class="countdown-class-name">${upcoming.name}</div>
             <div class="countdown-class-detail">${upcoming.code} · ${upcoming.room} · Starts at ${formatHour(upcoming.startHour, upcoming.startMin)}</div>
           </div>
@@ -1777,9 +1812,9 @@
       banner.className = 'countdown-banner';
       banner.innerHTML = `
         <div class="countdown-left">
-          <div class="countdown-status free">✅ Done for today</div>
+          <div class="countdown-status free">${svgIcons.check} Done for today</div>
           <div class="countdown-class-name">All classes completed!</div>
-          <div class="countdown-class-detail">Great work today 🎉</div>
+          <div class="countdown-class-detail">Great work today!</div>
         </div>
       `;
     }
@@ -1799,7 +1834,7 @@
     function toggleNotifications() {
       if (!notificationsEnabled) {
         if (!('Notification' in window)) {
-          showToast('⚠️ Notifications not supported in this browser');
+          showToast(svgIcons.warn + ' Notifications not supported in this browser');
           return;
         }
         Notification.requestPermission().then(perm => {
@@ -1807,16 +1842,16 @@
             notificationsEnabled = true;
             document.getElementById('notifToggle').classList.add('active');
             try { localStorage.setItem('notificationsEnabled', 'true'); } catch(e) {}
-            showToast('🔔 Reminders ON — 15 min before each class');
+            showToast(svgIcons.bellOn + ' Reminders ON — 15 min before each class');
           } else {
-            showToast('⚠️ Please allow notifications in browser settings');
+            showToast(svgIcons.warn + ' Please allow notifications in browser settings');
           }
         });
       } else {
         notificationsEnabled = false;
         document.getElementById('notifToggle').classList.remove('active');
         try { localStorage.setItem('notificationsEnabled', 'false'); } catch(e) {}
-        showToast('🔕 Reminders turned off');
+        showToast(svgIcons.bellOff + ' Reminders turned off');
       }
     }
 
@@ -1835,9 +1870,9 @@
         // Notify 15 minutes before
         if (diff > 0 && diff <= 15 && !notifiedClasses.has(key)) {
           notifiedClasses.add(key);
-          new Notification(`📚 ${sched.name}`, {
+          new Notification(`${sched.name}`, {
             body: `Starts in ${diff} min · ${sched.room} · ${sched.time}`,
-            icon: '📅',
+            icon: undefined,
             tag: key,
             requireInteraction: false
           });
@@ -1886,7 +1921,7 @@
       window.addEventListener('appinstalled', () => {
         document.getElementById('pwaBanner').classList.remove('show');
         deferredPrompt = null;
-        showToast('✅ App installed! Find it on your home screen');
+        showToast(svgIcons.check + ' App installed! Find it on your home screen');
       });
     }
 
@@ -1895,7 +1930,7 @@
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then(result => {
           if (result.outcome === 'accepted') {
-            showToast('✅ Installing...');
+            showToast(svgIcons.download + ' Installing...');
           }
           deferredPrompt = null;
           document.getElementById('pwaBanner').classList.remove('show');
@@ -2013,7 +2048,7 @@
             <div class="today-dot" style="background: var(--accent-5); box-shadow: 0 0 10px rgba(255, 234, 167, 0.5);"></div>
             <div class="today-label" style="color: var(--accent-5);">Weekend — No Classes</div>
           </div>
-          <div class="no-class-today">Enjoy your weekend! 🎉</div>
+          <div class="no-class-today">Enjoy your weekend!</div>
         `;
         return;
       }
@@ -2048,7 +2083,7 @@
         if (nextClass) {
           const now = new Date();
           const isOngoing = nextClass.currentSchedule.startHour <= now.getHours() && nextClass.currentSchedule.endHour > now.getHours();
-          const statusText = isOngoing ? '🔴 Ongoing' : '⏳ Up Next';
+          const statusText = isOngoing ? `${svgIcons.pulse} Ongoing` : `${svgIcons.hourglass} Up Next`;
           todaySection.innerHTML += `
             <div class="schedule-card theme-${nextClass.theme}" style="animation: none; border-color: rgba(85, 239, 196, 0.2);">
               <div class="card-accent"></div>
@@ -2075,7 +2110,7 @@
             <div class="today-dot"></div>
             <div class="today-label">Today · ${dayNames[today]}</div>
           </div>
-          <div class="no-class-today">No classes today! 🎉</div>
+          <div class="no-class-today">No classes today!</div>
         `;
       }
     }
@@ -2138,7 +2173,7 @@
                 <div class="timetable-block ${block.blockClass}">
                   <div class="block-code">${block.code}</div>
                   <div class="block-name">${block.name}</div>
-                  <div class="block-room">📍 ${block.room}</div>
+                  <div class="block-room">${svgIcons.mapPin} ${block.room}</div>
                 </div>
               `;
               tr.appendChild(td);
