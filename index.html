@@ -741,6 +741,11 @@
       color: var(--text-secondary);
     }
 
+    .card-meta-item.card-prof-item {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
     .card-meta-item svg {
       width: 14px;
       height: 14px;
@@ -1466,6 +1471,16 @@
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+    }
+
+    .timetable-block .block-prof {
+      font-size: 10.5px;
+      font-weight: 500;
+      opacity: 0.9;
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .timetable-block .block-room {
@@ -2362,6 +2377,10 @@
       border-radius: var(--radius-sm);
     }
 
+    .modal-info-card.full-width {
+      grid-column: 1 / -1;
+    }
+
     .modal-info-label {
       font-size: 11px;
       font-weight: 600;
@@ -2812,6 +2831,7 @@
         name: 'Information Assurance and Security 2',
         type: 'Lecture',
         units: 2,
+        instructor: 'Angelbert Maghanoy',
         schedules: [
           { time: '7:00 AM – 9:00 AM', day: 'M', dayFull: 'Monday', room: 'ST 302', startHour: 7, startMin: 0, endHour: 9, endMin: 0 }
         ],
@@ -2824,6 +2844,7 @@
         name: 'Information Assurance and Security 2',
         type: 'Laboratory',
         units: 3,
+        instructor: 'Angelbert Maghanoy',
         schedules: [
           { time: '7:00 AM – 10:00 AM', day: 'T', dayFull: 'Tuesday', room: 'IT 202', startHour: 7, startMin: 0, endHour: 10, endMin: 0 },
           { time: '7:00 AM – 10:00 AM', day: 'W', dayFull: 'Wednesday', room: 'IT 202', startHour: 7, startMin: 0, endHour: 10, endMin: 0 },
@@ -2838,6 +2859,7 @@
         name: 'Systems Administration and Maintenance',
         type: '',
         units: 3,
+        instructor: 'Suzzete B. Bacus',
         schedules: [
           { time: '9:00 AM – 12:00 PM', day: 'M', dayFull: 'Monday', room: 'IT 402', startHour: 9, startMin: 0, endHour: 12, endMin: 0 },
           { time: '10:00 AM – 12:00 PM', day: 'T', dayFull: 'Tuesday', room: 'IT 402', startHour: 10, startMin: 0, endHour: 12, endMin: 0 }
@@ -2851,6 +2873,7 @@
         name: 'Capstone Project and Research 2 (Technopreneurship 2)',
         type: '',
         units: 3,
+        instructor: 'Bell S. Campanilla',
         schedules: [
           { time: '10:00 AM – 12:00 PM', day: 'W', dayFull: 'Wednesday', room: 'ST 303', startHour: 10, startMin: 0, endHour: 12, endMin: 0 },
           { time: '10:00 AM – 11:00 AM', day: 'Th', dayFull: 'Thursday', room: 'ST 303', startHour: 10, startMin: 0, endHour: 11, endMin: 0 }
@@ -2864,6 +2887,7 @@
         name: 'Professional Elective 4',
         type: '',
         units: 3,
+        instructor: 'Leodivino A. Lawas',
         schedules: [
           { time: '1:00 PM – 3:00 PM', day: 'T', dayFull: 'Tuesday', room: 'IT 301', startHour: 13, startMin: 0, endHour: 15, endMin: 0 },
           { time: '1:00 PM – 4:00 PM', day: 'W', dayFull: 'Wednesday', room: 'IT 301', startHour: 13, startMin: 0, endHour: 16, endMin: 0 }
@@ -2877,6 +2901,7 @@
         name: 'Cross-Platform Script Development Technology',
         type: '',
         units: 3,
+        instructor: 'Arve Baes',
         schedules: [
           { time: '7:00 AM – 12:00 PM', day: 'F', dayFull: 'Friday', room: 'ST 301', startHour: 7, startMin: 0, endHour: 12, endMin: 0 }
         ],
@@ -2896,7 +2921,8 @@
       pin: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
       school: '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg>',
       globe: '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
-      video: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>'
+      video: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>',
+      user: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
     };
 
     // ─── Toast ───
@@ -3048,6 +3074,7 @@
             result.push({
               code: sub.code,
               name: sub.name,
+              instructor: sub.instructor,
               room: sched.room,
               time: sched.time,
               startHour: sched.startHour,
@@ -3105,7 +3132,7 @@
           <div class="countdown-left">
             <div class="countdown-status ongoing">${svgIcons.pulse} In Progress</div>
             <div class="countdown-class-name">${ongoing.name}</div>
-            <div class="countdown-class-detail">${ongoing.code} · ${locDetail} · Ends at ${formatHour(ongoing.endHour, ongoing.endMin)}</div>
+            <div class="countdown-class-detail">${ongoing.code} · ${ongoing.instructor} · ${locDetail} · Ends at ${formatHour(ongoing.endHour, ongoing.endMin)}</div>
           </div>
           <div class="countdown-timer">
             <div class="countdown-unit">
@@ -3151,7 +3178,7 @@
           <div class="countdown-left">
             <div class="countdown-status upcoming">${svgIcons.hourglass} Up Next</div>
             <div class="countdown-class-name">${upcoming.name}</div>
-            <div class="countdown-class-detail">${upcoming.code} · ${locDetail} · Starts at ${formatHour(upcoming.startHour, upcoming.startMin)}</div>
+            <div class="countdown-class-detail">${upcoming.code} · ${upcoming.instructor} · ${locDetail} · Starts at ${formatHour(upcoming.startHour, upcoming.startMin)}</div>
           </div>
           <div class="countdown-timer">
             <div class="countdown-unit">
@@ -3380,6 +3407,10 @@
                 </div>
                 <div class="card-title">${sub.name}</div>
                 <div class="card-meta">
+                  <div class="card-meta-item card-prof-item">
+                    ${icons.user}
+                    <span>${sub.instructor}</span>
+                  </div>
                   <div class="card-meta-item">
                     ${icons.clock}
                     <span>${sched.time}</span>
@@ -3493,6 +3524,7 @@
                   </div>
                   <div class="card-title">${nextClass.name}</div>
                   <div class="card-meta">
+                    <div class="card-meta-item card-prof-item">${icons.user}<span>${nextClass.instructor}</span></div>
                     <div class="card-meta-item">${icons.clock}<span>${nextClass.currentSchedule.time}</span></div>
                     ${isF2F ? `
                       <div class="card-meta-item">${icons.pin}<span>${nextClass.currentSchedule.room}</span></div>
@@ -3547,6 +3579,7 @@
             rowSpan: sched.endHour - sched.startHour,
             code: sub.code,
             name: sub.name,
+            instructor: sub.instructor,
             room: sched.room,
             blockClass: sub.blockClass,
             mode: mode
@@ -3585,6 +3618,7 @@
                      title="Tap to view full class details">
                   <div class="block-code">${block.code}</div>
                   <div class="block-name">${block.name}</div>
+                  <div class="block-prof">${block.instructor}</div>
                   <div class="timetable-mode-badge ${isOnline ? 'online' : 'f2f'}">
                     ${isOnline ? icons.globe + ' Online' : icons.school + ' F2F'}
                   </div>
@@ -3696,6 +3730,10 @@
               </div>
               <div class="timeline-card-title">${item.name}</div>
               <div class="timeline-card-meta">
+                <div class="card-meta-item card-prof-item">
+                  ${icons.user}
+                  <span>${item.instructor}</span>
+                </div>
                 <div class="card-meta-item">
                   ${icons.clock}
                   <span>${durationHours} hr${durationHours > 1 ? 's' : ''} (${item.units} Units · ${item.type || 'Lecture'})</span>
@@ -3768,6 +3806,13 @@
           </div>
 
           <div class="modal-grid">
+            <div class="modal-info-card full-width">
+              <div class="modal-info-label">
+                ${icons.user} Professor / Instructor
+              </div>
+              <div class="modal-info-value">${sub.instructor}</div>
+            </div>
+
             <div class="modal-info-card">
               <div class="modal-info-label">
                 ${icons.calendar} Day
