@@ -53,26 +53,36 @@
     }
 
     html.light {
-      --bg-primary: #f5f5fa;
-      --bg-secondary: #eeeef4;
-      --bg-card: rgba(255, 255, 255, 0.7);
-      --bg-card-hover: rgba(255, 255, 255, 0.9);
-      --border-subtle: rgba(0, 0, 0, 0.06);
-      --border-accent: rgba(0, 0, 0, 0.1);
-      --text-primary: #1a1a2e;
-      --text-secondary: #5a5a7a;
-      --text-muted: #9999aa;
-      --accent-1: #5b4cdb;
+      --bg-primary: #f6f6f9;
+      --bg-secondary: #ececf1;
+      --bg-card: rgba(255, 255, 255, 0.98);
+      --bg-card-hover: #ffffff;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-accent: rgba(0, 0, 0, 0.15);
+      --text-primary: #1e1e2d;
+      --text-secondary: #5a5a75;
+      --text-muted: #8888a0;
+      --accent-1: #6c5ce7;
       --accent-2: #6c5ce7;
       --accent-3: #e84393;
       --accent-4: #00b894;
-      --accent-5: #e2a300;
+      --accent-5: #d89600;
       --accent-6: #00b894;
-      --shadow-glow: 0 0 40px rgba(108, 92, 231, 0.1);
-      --orb-opacity: 0.12;
-      --grid-line: rgba(0,0,0,0.03);
-      --scrollbar-thumb: rgba(0, 0, 0, 0.12);
-      --scrollbar-hover: rgba(0, 0, 0, 0.2);
+      --shadow-glow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --orb-opacity: 0.04;
+      --grid-line: rgba(0,0,0,0.04);
+      --scrollbar-thumb: rgba(0, 0, 0, 0.15);
+      --scrollbar-hover: rgba(0, 0, 0, 0.25);
+    }
+
+    html.light .schedule-card,
+    html.light .stat-card,
+    html.light .total-card,
+    html.light .countdown-banner,
+    html.light .nav-tabs,
+    html.light .theme-toggle,
+    html.light .notif-toggle {
+      box-shadow: var(--shadow-glow);
     }
 
     html {
@@ -839,12 +849,12 @@
       color: #ffd4c8;
     }
 
-    html.light .block-purple { color: #4a3fbf; }
-    html.light .block-pink { color: #c0305a; }
-    html.light .block-teal { color: #007d78; }
-    html.light .block-gold { color: #9a7200; }
-    html.light .block-green { color: #007a5e; }
-    html.light .block-red { color: #b8422e; }
+    html.light .block-purple { background: rgba(108, 92, 231, 0.1); border-color: rgba(108, 92, 231, 0.25); color: #4a3fbf; }
+    html.light .block-pink { background: rgba(253, 121, 168, 0.15); border-color: rgba(253, 121, 168, 0.25); color: #c0305a; }
+    html.light .block-teal { background: rgba(0, 206, 201, 0.15); border-color: rgba(0, 206, 201, 0.25); color: #007d78; }
+    html.light .block-gold { background: rgba(220, 160, 0, 0.1); border-color: rgba(220, 160, 0, 0.25); color: #9a7200; }
+    html.light .block-green { background: rgba(0, 184, 148, 0.1); border-color: rgba(0, 184, 148, 0.25); color: #007a5e; }
+    html.light .block-red { background: rgba(225, 112, 85, 0.15); border-color: rgba(225, 112, 85, 0.25); color: #b8422e; }
 
     /* ─── Fees Section ─── */
     .fees-container {
