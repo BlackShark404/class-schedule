@@ -983,13 +983,22 @@
       box-shadow: inset 0 0 0 1px rgba(0, 206, 201, 0.45), 0 0 12px rgba(0, 206, 201, 0.15);
     }
 
-    /* Hybrid Summary & Batch Actions in filter bar */
+    /* ─── Day Filter & Batch Actions Bar ─── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
     .filter-actions-group {
-      margin-left: auto;
       display: inline-flex;
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
+      flex-shrink: 0;
     }
 
     .batch-mode-toggle {
@@ -1706,34 +1715,50 @@
     /* ─── Day Filter Pills ─── */
     .day-filter {
       display: flex;
+      align-items: center;
       gap: 8px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-      animation: fadeInUp 0.8s ease-out 0.35s both;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 4px 2px;
+      max-width: 100%;
+    }
+
+    .day-filter::-webkit-scrollbar {
+      display: none;
     }
 
     .day-pill {
-      padding: 8px 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 38px;
+      padding: 0 18px;
       border-radius: 100px;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-secondary);
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       cursor: pointer;
-      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       font-family: inherit;
+      position: relative;
     }
 
     .day-pill:not(.active):hover {
       color: var(--text-primary);
       border-color: var(--border-accent);
+      background: var(--bg-card-hover);
     }
 
     .day-pill.active {
-      background: rgba(108, 92, 231, 0.15);
+      background: rgba(108, 92, 231, 0.2);
       color: var(--accent-2);
-      border-color: rgba(108, 92, 231, 0.3);
+      border-color: rgba(108, 92, 231, 0.45);
+      box-shadow: 0 2px 10px rgba(108, 92, 231, 0.25);
     }
 
     .day-pill.today-pill {
@@ -1749,7 +1774,7 @@
       height: 8px;
       border-radius: 50%;
       background: var(--accent-6);
-      box-shadow: 0 0 6px rgba(85, 239, 196, 0.6);
+      box-shadow: 0 0 6px rgba(85, 239, 196, 0.8);
     }
 
     /* ─── Section Title ─── */
@@ -2028,11 +2053,17 @@
         font-size: 12px;
       }
 
+      .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
       .day-filter {
+        width: 100%;
         overflow-x: auto;
         flex-wrap: nowrap;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
         padding-bottom: 4px;
       }
 
@@ -2042,8 +2073,15 @@
 
       .day-pill {
         flex-shrink: 0;
-        padding: 6px 14px;
+        height: 36px;
+        padding: 0 16px;
         font-size: 12px;
+      }
+
+      .filter-actions-group {
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 0;
       }
 
       .pwa-banner {
@@ -2579,14 +2617,16 @@
       <!-- Today Section -->
       <div class="today-section" id="todaySection"></div>
 
-      <!-- Day Filter -->
-      <div class="day-filter" id="dayFilter">
-        <button class="day-pill active" onclick="filterDay('all')">All</button>
-        <button class="day-pill" data-day="M" onclick="filterDay('M')">Monday</button>
-        <button class="day-pill" data-day="T" onclick="filterDay('T')">Tuesday</button>
-        <button class="day-pill" data-day="W" onclick="filterDay('W')">Wednesday</button>
-        <button class="day-pill" data-day="Th" onclick="filterDay('Th')">Thursday</button>
-        <button class="day-pill" data-day="F" onclick="filterDay('F')">Friday</button>
+      <!-- Day Filter & Batch Bar -->
+      <div class="filter-bar">
+        <div class="day-filter" id="dayFilter">
+          <button class="day-pill active" onclick="filterDay('all')">All</button>
+          <button class="day-pill" data-day="M" onclick="filterDay('M')">Monday</button>
+          <button class="day-pill" data-day="T" onclick="filterDay('T')">Tuesday</button>
+          <button class="day-pill" data-day="W" onclick="filterDay('W')">Wednesday</button>
+          <button class="day-pill" data-day="Th" onclick="filterDay('Th')">Thursday</button>
+          <button class="day-pill" data-day="F" onclick="filterDay('F')">Friday</button>
+        </div>
 
         <div class="filter-actions-group">
           <div class="batch-mode-toggle" id="batchModeToggle">
