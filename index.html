@@ -3178,6 +3178,18 @@
       }
     }
 
+    function sendNotification(title, options) {
+      if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.ready.then(reg => {
+          reg.showNotification(title, options);
+        }).catch(() => {
+          try { new Notification(title, options); } catch (e) { }
+        });
+      } else if ('Notification' in window && Notification.permission === 'granted') {
+        try { new Notification(title, options); } catch (e) { }
+      }
+    }
+
     function checkReminders() {
       if (!notificationsEnabled) return;
 
@@ -3195,10 +3207,12 @@
           notifiedClasses.add(key);
           const isOnline = sched.mode === 'online';
           const locText = isOnline ? '🌐 Online Class' : `📍 ${sched.room}`;
-          new Notification(`${sched.name}`, {
-            body: `Starts in ${diff} min · ${locText} · ${sched.time}`,
-            icon: undefined,
+          sendNotification(`${sched.code} · ${sched.name}`, {
+            body: `Starts in ${diff} min (${sched.time}) · ${locText}`,
+            icon: './ctu-logo.png',
+            badge: './ctu-logo.png',
             tag: key,
+            vibrate: [200, 100, 200],
             requireInteraction: false
           });
         }
