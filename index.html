@@ -2921,7 +2921,15 @@
         }
       } catch (e) { }
 
-      renderCards();
+      // Smart Auto-Select Today (Option B)
+      const currentDayNum = new Date().getDay();
+      const todayFilterCode = dayShort[currentDayNum];
+      if (todayFilterCode) {
+        filterDay(todayFilterCode);
+      } else {
+        filterDay('all');
+      }
+
       highlightToday();
       buildTimetable();
       updateCountdown();
@@ -2944,12 +2952,22 @@
       setInterval(updateCountdown, 1000);
       setInterval(checkReminders, 30000); // Check reminders every 30s
 
-      // Reset notified classes at midnight
+      // Reset notified classes and refresh schedule at midnight
       const now = new Date();
       const msUntilMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).getTime() - now.getTime();
       setTimeout(() => {
         notifiedClasses.clear();
-        setInterval(() => notifiedClasses.clear(), 86400000);
+        const newDayCode = dayShort[new Date().getDay()];
+        filterDay(newDayCode || 'all');
+        highlightToday();
+        buildTimetable();
+        setInterval(() => {
+          notifiedClasses.clear();
+          const dCode = dayShort[new Date().getDay()];
+          filterDay(dCode || 'all');
+          highlightToday();
+          buildTimetable();
+        }, 86400000);
       }, msUntilMidnight);
     }
 
