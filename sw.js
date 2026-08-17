@@ -1,22 +1,31 @@
-const CACHE_NAME = 'schedule-pwa-v2';
+const CACHE_NAME = 'schedule-pwa-v3';
 const STATIC_ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './ctu-logo.png'
+  './ctu-logo.png',
+  'index.html',
+  'manifest.json',
+  'ctu-logo.png'
 ];
 
-// Install: Cache core assets and activate immediately
+// Install Event
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+      return Promise.all(
+        STATIC_ASSETS.map((url) => {
+          return cache.add(url).catch((err) => {
+            console.warn('Failed to cache asset on install:', url, err);
+          });
+        })
+      );
     })
   );
-  self.skipWaiting();
 });
 
-// Activate: Delete old caches and claim clients
+// Activate Event
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -31,65 +40,45 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: Rock-solid offline handler
+// Fetch Event
 self.addEventListener('fetch', (event) => {
   const request = event.request;
 
-  // 1. Navigation requests (Opening the app / page reload)
-  if (request.mode === 'navigate') {
+  // Handle HTML navigation (Opening app, clicking links, reloads)
+  if (request.mode === 'navigate' || (request.headers.get('accept') && request.headers.get('accept').includes('text/html'))) {
     event.respondWith(
-      caches.match('./index.html').then((cached) => {
-        if (cached) return cached;
-        return caches.match('./').then((rootCached) => {
-          if (rootCached) return rootCached;
-          return fetch(request).catch(() => caches.match('./index.html'));
-        });
+      fetch(request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+        }
+        return networkResponse;
+      }).catch(() => {
+        // Offline: Return cached HTML
+        return caches.match('./index.html')
+          .then((r) => r || caches.match('index.html'))
+          .then((r) => r || caches.match('./'))
+          .then((r) => r || caches.match('/'));
       })
     );
     return;
   }
 
-  // 2. Static Assets (Cache-First)
+  // Handle other resources (images, icons, manifest)
   event.respondWith(
     caches.match(request, { ignoreSearch: true }).then((cachedResponse) => {
       if (cachedResponse) {
         return cachedResponse;
       }
       return fetch(request).then((networkResponse) => {
-        if (
-          networkResponse &&
-          networkResponse.status === 200 &&
-          request.url.startsWith('http')
-        ) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseToCache);
-          });
+        if (networkResponse && networkResponse.status === 200 && request.url.startsWith('http')) {
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
         }
         return networkResponse;
       }).catch(() => {
-        // Return empty 404 response for failed subresources, do NOT return HTML
         return new Response('', { status: 408, statusText: 'Offline' });
       });
-    })
-  );
-});
-
-// Notification click handler
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  event.waitUntil(
-    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
-      if (clientList.length > 0) {
-        let client = clientList[0];
-        for (let i = 0; i < clientList.length; i++) {
-          if (clientList[i].focused) {
-            client = clientList[i];
-          }
-        }
-        return client.focus();
-      }
-      return clients.openWindow('./index.html');
     })
   );
 });
