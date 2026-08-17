@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Class Schedule — Khen Sorela | BSIT 4</title>
   <meta name="description" content="Class schedule for Khen Delgado Sorela, BSIT 4, 1st Semester SY 2026-2027, Cebu Technological University">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="My Schedule">
+  <link rel="manifest" id="manifestLink">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
@@ -41,6 +46,33 @@
       --radius-md: 12px;
       --radius-lg: 16px;
       --radius-xl: 24px;
+      --orb-opacity: 0.3;
+      --grid-line: rgba(255,255,255,0.02);
+      --scrollbar-thumb: rgba(255, 255, 255, 0.1);
+      --scrollbar-hover: rgba(255, 255, 255, 0.2);
+    }
+
+    html.light {
+      --bg-primary: #f5f5fa;
+      --bg-secondary: #eeeef4;
+      --bg-card: rgba(255, 255, 255, 0.7);
+      --bg-card-hover: rgba(255, 255, 255, 0.9);
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --border-accent: rgba(0, 0, 0, 0.1);
+      --text-primary: #1a1a2e;
+      --text-secondary: #5a5a7a;
+      --text-muted: #9999aa;
+      --accent-1: #5b4cdb;
+      --accent-2: #6c5ce7;
+      --accent-3: #e84393;
+      --accent-4: #00b894;
+      --accent-5: #e2a300;
+      --accent-6: #00b894;
+      --shadow-glow: 0 0 40px rgba(108, 92, 231, 0.1);
+      --orb-opacity: 0.12;
+      --grid-line: rgba(0,0,0,0.03);
+      --scrollbar-thumb: rgba(0, 0, 0, 0.12);
+      --scrollbar-hover: rgba(0, 0, 0, 0.2);
     }
 
     html {
@@ -54,6 +86,7 @@
       min-height: 100vh;
       overflow-x: hidden;
       line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     /* ─── Background Effects ─── */
@@ -69,8 +102,9 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(120px);
-      opacity: 0.3;
+      opacity: var(--orb-opacity);
       animation: float 20s ease-in-out infinite;
+      transition: opacity 0.4s ease;
     }
 
     .bg-orb:nth-child(1) {
@@ -112,11 +146,12 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
       background-size: 60px 60px;
       pointer-events: none;
       z-index: 0;
+      transition: background-image 0.4s ease;
     }
 
     /* ─── Layout ─── */
@@ -139,7 +174,14 @@
       justify-content: space-between;
       margin-bottom: 32px;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
+    }
+
+    .header-top-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .uni-badge {
@@ -153,6 +195,7 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       animation: fadeInDown 0.6s ease-out;
+      transition: background 0.3s, border-color 0.3s;
     }
 
     .uni-icon {
@@ -172,7 +215,6 @@
       font-size: 13px;
       font-weight: 500;
       color: var(--text-secondary);
-      letter-spacing: 0.02em;
     }
 
     .semester-badge {
@@ -186,6 +228,60 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       animation: fadeInDown 0.6s ease-out 0.1s both;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: fadeInDown 0.6s ease-out 0.15s both;
+    }
+
+    /* ─── Theme Toggle ─── */
+    .theme-toggle, .notif-toggle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+      font-size: 18px;
+      position: relative;
+    }
+
+    .theme-toggle:hover, .notif-toggle:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: scale(1.05);
+    }
+
+    .theme-toggle:active, .notif-toggle:active {
+      transform: scale(0.95);
+    }
+
+    .notif-toggle.active {
+      border-color: rgba(85, 239, 196, 0.4);
+      color: var(--accent-6);
+    }
+
+    .notif-toggle.active::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-6);
+      box-shadow: 0 0 6px rgba(85, 239, 196, 0.6);
     }
 
     .hero {
@@ -236,6 +332,107 @@
       50% { opacity: 0.5; transform: scale(0.8); }
     }
 
+    /* ─── Countdown Banner ─── */
+    .countdown-banner {
+      margin-bottom: 24px;
+      padding: 20px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease-out 0.32s both;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .countdown-banner.ongoing {
+      border-color: rgba(253, 121, 168, 0.25);
+    }
+
+    .countdown-banner.upcoming {
+      border-color: rgba(85, 239, 196, 0.2);
+    }
+
+    .countdown-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .countdown-status {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .countdown-status.ongoing {
+      color: var(--accent-3);
+    }
+
+    .countdown-status.upcoming {
+      color: var(--accent-6);
+    }
+
+    .countdown-status.free {
+      color: var(--accent-5);
+    }
+
+    .countdown-class-name {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .countdown-class-detail {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .countdown-timer {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .countdown-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(108, 92, 231, 0.1);
+      border-radius: var(--radius-md);
+      min-width: 56px;
+    }
+
+    .countdown-unit-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--accent-2);
+    }
+
+    .countdown-unit-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    .countdown-separator {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: -12px;
+    }
+
     /* ─── Navigation Tabs ─── */
     .nav-tabs {
       display: flex;
@@ -249,6 +446,7 @@
       margin-bottom: 32px;
       animation: fadeInUp 0.8s ease-out 0.3s both;
       width: fit-content;
+      transition: background 0.3s, border-color 0.3s;
     }
 
     .nav-tab {
@@ -267,6 +465,10 @@
     .nav-tab:hover {
       color: var(--text-primary);
       background: rgba(255, 255, 255, 0.04);
+    }
+
+    html.light .nav-tab:hover {
+      background: rgba(0, 0, 0, 0.04);
     }
 
     .nav-tab.active {
@@ -435,6 +637,10 @@
       min-width: 70px;
     }
 
+    html.light .card-units {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
     .card-units-value {
       font-size: 22px;
       font-weight: 700;
@@ -478,6 +684,7 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       -webkit-overflow-scrolling: touch;
+      transition: background 0.3s, border-color 0.3s;
     }
 
     .timetable {
@@ -499,6 +706,10 @@
       position: sticky;
       top: 0;
       z-index: 2;
+    }
+
+    html.light .timetable thead th {
+      background: rgba(0, 0, 0, 0.02);
     }
 
     .timetable thead th:first-child {
@@ -607,6 +818,13 @@
       color: #ffbfb0;
     }
 
+    html.light .block-purple { color: #4a3fbf; }
+    html.light .block-pink { color: #c0305a; }
+    html.light .block-teal { color: #007d78; }
+    html.light .block-gold { color: #9a7200; }
+    html.light .block-green { color: #007a5e; }
+    html.light .block-red { color: #b8422e; }
+
     /* ─── Fees Section ─── */
     .fees-container {
       display: grid;
@@ -622,6 +840,7 @@
       overflow: hidden;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+      transition: background 0.3s, border-color 0.3s;
     }
 
     .fee-item {
@@ -639,6 +858,10 @@
 
     .fee-item:hover {
       background: rgba(255, 255, 255, 0.02);
+    }
+
+    html.light .fee-item:hover {
+      background: rgba(0, 0, 0, 0.02);
     }
 
     .fee-name {
@@ -685,6 +908,7 @@
       -webkit-backdrop-filter: blur(20px);
       position: relative;
       overflow: hidden;
+      transition: background 0.3s, border-color 0.3s;
     }
 
     .total-card::before {
@@ -763,6 +987,7 @@
       font-size: 14px;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+      transition: background 0.3s, border-color 0.3s;
     }
 
     /* ─── Day Filter Pills ─── */
@@ -822,6 +1047,79 @@
       letter-spacing: -0.02em;
     }
 
+    /* ─── PWA Install Banner ─── */
+    .pwa-banner {
+      display: none;
+      margin-bottom: 24px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid rgba(108, 92, 231, 0.2);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      animation: fadeInDown 0.5s ease-out;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .pwa-banner.show {
+      display: flex;
+    }
+
+    .pwa-banner-text {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .pwa-banner-text span:first-child {
+      font-size: 24px;
+    }
+
+    .pwa-banner-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pwa-install-btn {
+      padding: 8px 20px;
+      border-radius: 100px;
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .pwa-install-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+    }
+
+    .pwa-dismiss-btn {
+      padding: 8px 16px;
+      border-radius: 100px;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .pwa-dismiss-btn:hover {
+      border-color: var(--border-accent);
+      color: var(--text-secondary);
+    }
+
     /* ─── Footer ─── */
     .footer {
       padding: 40px 0;
@@ -863,6 +1161,12 @@
         align-items: flex-start;
       }
 
+      .header-controls {
+        position: absolute;
+        top: 24px;
+        right: 16px;
+      }
+
       .card-content {
         grid-template-columns: 1fr;
         padding: 16px;
@@ -901,6 +1205,25 @@
       .hero h1 {
         font-size: 28px;
       }
+
+      .countdown-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .countdown-timer {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .pwa-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .pwa-banner-text {
+        flex-direction: column;
+      }
     }
 
     @media (max-width: 480px) {
@@ -920,6 +1243,15 @@
       .card-meta {
         gap: 12px;
       }
+
+      .countdown-unit {
+        min-width: 48px;
+        padding: 6px 10px;
+      }
+
+      .countdown-unit-value {
+        font-size: 20px;
+      }
     }
 
     /* ─── Scrollbar ─── */
@@ -933,12 +1265,37 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--scrollbar-thumb);
       border-radius: 3px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: var(--scrollbar-hover);
+    }
+
+    /* ─── Toast Notification ─── */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      z-index: 1000;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
     }
   </style>
 </head>
@@ -954,14 +1311,36 @@
 
   <div class="container">
 
+    <!-- PWA Install Banner -->
+    <div class="pwa-banner" id="pwaBanner">
+      <div class="pwa-banner-text">
+        <span>📱</span>
+        <span>Install this schedule on your home screen for quick access!</span>
+      </div>
+      <div class="pwa-banner-actions">
+        <button class="pwa-install-btn" id="pwaInstallBtn" onclick="installPWA()">Install App</button>
+        <button class="pwa-dismiss-btn" onclick="dismissPWA()">Later</button>
+      </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
       <div class="header-top">
-        <div class="uni-badge">
-          <div class="uni-icon">C</div>
-          <span class="uni-name">Cebu Technological University — Main Campus</span>
+        <div class="header-top-left">
+          <div class="uni-badge">
+            <div class="uni-icon">C</div>
+            <span class="uni-name">Cebu Technological University — Main Campus</span>
+          </div>
+          <div class="semester-badge">1st Semester · SY 2026–2027</div>
         </div>
-        <div class="semester-badge">1st Semester · SY 2026–2027</div>
+        <div class="header-controls">
+          <button class="notif-toggle" id="notifToggle" onclick="toggleNotifications()" title="Class Reminders">
+            🔔
+          </button>
+          <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode">
+            🌙
+          </button>
+        </div>
       </div>
       <div class="hero">
         <h1>
@@ -983,6 +1362,9 @@
         </div>
       </div>
     </header>
+
+    <!-- Countdown Banner -->
+    <div class="countdown-banner" id="countdownBanner"></div>
 
     <!-- Navigation Tabs -->
     <div class="nav-tabs" id="navTabs">
@@ -1128,6 +1510,9 @@
 
   </div>
 
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
   <script>
     // ─── Schedule Data ───
     const subjects = [
@@ -1138,7 +1523,7 @@
         type: 'Lecture',
         units: 2,
         schedules: [
-          { time: '7:00 AM – 9:00 AM', day: 'M', dayFull: 'Monday', room: 'ST 302', startHour: 7, endHour: 9 }
+          { time: '7:00 AM – 9:00 AM', day: 'M', dayFull: 'Monday', room: 'ST 302', startHour: 7, startMin: 0, endHour: 9, endMin: 0 }
         ],
         theme: 'purple',
         blockClass: 'block-purple'
@@ -1150,9 +1535,9 @@
         type: 'Laboratory',
         units: 3,
         schedules: [
-          { time: '7:00 AM – 10:00 AM', day: 'T', dayFull: 'Tuesday', room: 'IT 202', startHour: 7, endHour: 10 },
-          { time: '7:00 AM – 10:00 AM', day: 'W', dayFull: 'Wednesday', room: 'IT 202', startHour: 7, endHour: 10 },
-          { time: '7:00 AM – 10:00 AM', day: 'Th', dayFull: 'Thursday', room: 'IT 202', startHour: 7, endHour: 10 }
+          { time: '7:00 AM – 10:00 AM', day: 'T', dayFull: 'Tuesday', room: 'IT 202', startHour: 7, startMin: 0, endHour: 10, endMin: 0 },
+          { time: '7:00 AM – 10:00 AM', day: 'W', dayFull: 'Wednesday', room: 'IT 202', startHour: 7, startMin: 0, endHour: 10, endMin: 0 },
+          { time: '7:00 AM – 10:00 AM', day: 'Th', dayFull: 'Thursday', room: 'IT 202', startHour: 7, startMin: 0, endHour: 10, endMin: 0 }
         ],
         theme: 'pink',
         blockClass: 'block-pink'
@@ -1164,8 +1549,8 @@
         type: '',
         units: 3,
         schedules: [
-          { time: '9:00 AM – 12:00 PM', day: 'M', dayFull: 'Monday', room: 'IT 402', startHour: 9, endHour: 12 },
-          { time: '10:00 AM – 12:00 PM', day: 'T', dayFull: 'Tuesday', room: 'IT 402', startHour: 10, endHour: 12 }
+          { time: '9:00 AM – 12:00 PM', day: 'M', dayFull: 'Monday', room: 'IT 402', startHour: 9, startMin: 0, endHour: 12, endMin: 0 },
+          { time: '10:00 AM – 12:00 PM', day: 'T', dayFull: 'Tuesday', room: 'IT 402', startHour: 10, startMin: 0, endHour: 12, endMin: 0 }
         ],
         theme: 'teal',
         blockClass: 'block-teal'
@@ -1177,8 +1562,8 @@
         type: '',
         units: 3,
         schedules: [
-          { time: '10:00 AM – 12:00 PM', day: 'W', dayFull: 'Wednesday', room: 'ST 303', startHour: 10, endHour: 12 },
-          { time: '10:00 AM – 11:00 AM', day: 'Th', dayFull: 'Thursday', room: 'ST 303', startHour: 10, endHour: 11 }
+          { time: '10:00 AM – 12:00 PM', day: 'W', dayFull: 'Wednesday', room: 'ST 303', startHour: 10, startMin: 0, endHour: 12, endMin: 0 },
+          { time: '10:00 AM – 11:00 AM', day: 'Th', dayFull: 'Thursday', room: 'ST 303', startHour: 10, startMin: 0, endHour: 11, endMin: 0 }
         ],
         theme: 'gold',
         blockClass: 'block-gold'
@@ -1190,8 +1575,8 @@
         type: '',
         units: 3,
         schedules: [
-          { time: '1:00 PM – 3:00 PM', day: 'T', dayFull: 'Tuesday', room: 'IT 301', startHour: 13, endHour: 15 },
-          { time: '1:00 PM – 4:00 PM', day: 'W', dayFull: 'Wednesday', room: 'IT 301', startHour: 13, endHour: 16 }
+          { time: '1:00 PM – 3:00 PM', day: 'T', dayFull: 'Tuesday', room: 'IT 301', startHour: 13, startMin: 0, endHour: 15, endMin: 0 },
+          { time: '1:00 PM – 4:00 PM', day: 'W', dayFull: 'Wednesday', room: 'IT 301', startHour: 13, startMin: 0, endHour: 16, endMin: 0 }
         ],
         theme: 'green',
         blockClass: 'block-green'
@@ -1203,7 +1588,7 @@
         type: '',
         units: 3,
         schedules: [
-          { time: '7:00 AM – 12:00 PM', day: 'F', dayFull: 'Friday', room: 'ST 301', startHour: 7, endHour: 12 }
+          { time: '7:00 AM – 12:00 PM', day: 'F', dayFull: 'Friday', room: 'ST 301', startHour: 7, startMin: 0, endHour: 12, endMin: 0 }
         ],
         theme: 'red',
         blockClass: 'block-red'
@@ -1220,6 +1605,338 @@
       calendar: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
       pin: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
     };
+
+    // ─── Toast ───
+    function showToast(message, duration = 3000) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), duration);
+    }
+
+    // ═══════════════════════════════════════
+    //  THEME TOGGLE (Light / Dark)
+    // ═══════════════════════════════════════
+    function applyTheme(theme) {
+      const html = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (theme === 'light') {
+        html.classList.add('light');
+        toggle.textContent = '☀️';
+        toggle.title = 'Switch to Dark Mode';
+        if (meta) meta.content = '#f5f5fa';
+      } else {
+        html.classList.remove('light');
+        toggle.textContent = '🌙';
+        toggle.title = 'Switch to Light Mode';
+        if (meta) meta.content = '#0a0a0f';
+      }
+    }
+
+    function toggleTheme() {
+      const isLight = document.documentElement.classList.contains('light');
+      const newTheme = isLight ? 'dark' : 'light';
+      applyTheme(newTheme);
+      try { localStorage.setItem('theme', newTheme); } catch(e) {}
+      showToast(newTheme === 'light' ? '☀️ Light mode' : '🌙 Dark mode');
+    }
+
+    // ═══════════════════════════════════════
+    //  LIVE COUNTDOWN TIMER
+    // ═══════════════════════════════════════
+    function getTodaySchedules() {
+      const today = new Date().getDay();
+      const todayCode = dayShort[today];
+      if (!todayCode) return [];
+
+      const result = [];
+      subjects.forEach(sub => {
+        sub.schedules.forEach(sched => {
+          if (sched.day === todayCode) {
+            result.push({
+              code: sub.code,
+              name: sub.name,
+              room: sched.room,
+              time: sched.time,
+              startHour: sched.startHour,
+              startMin: sched.startMin || 0,
+              endHour: sched.endHour,
+              endMin: sched.endMin || 0,
+              theme: sub.theme
+            });
+          }
+        });
+      });
+
+      return result.sort((a, b) => (a.startHour * 60 + a.startMin) - (b.startHour * 60 + b.startMin));
+    }
+
+    function updateCountdown() {
+      const banner = document.getElementById('countdownBanner');
+      const now = new Date();
+      const currentMin = now.getHours() * 60 + now.getMinutes();
+      const todaySchedules = getTodaySchedules();
+
+      if (todaySchedules.length === 0) {
+        banner.className = 'countdown-banner';
+        banner.innerHTML = `
+          <div class="countdown-left">
+            <div class="countdown-status free">🎉 Free Day</div>
+            <div class="countdown-class-name">No classes scheduled today</div>
+            <div class="countdown-class-detail">Enjoy your day off!</div>
+          </div>
+        `;
+        return;
+      }
+
+      // Check for ongoing class
+      const ongoing = todaySchedules.find(s => {
+        const start = s.startHour * 60 + s.startMin;
+        const end = s.endHour * 60 + s.endMin;
+        return currentMin >= start && currentMin < end;
+      });
+
+      if (ongoing) {
+        const endMin = ongoing.endHour * 60 + ongoing.endMin;
+        const diff = endMin - currentMin;
+        const h = Math.floor(diff / 60);
+        const m = diff % 60;
+        const s = 59 - now.getSeconds();
+
+        banner.className = 'countdown-banner ongoing';
+        banner.innerHTML = `
+          <div class="countdown-left">
+            <div class="countdown-status ongoing">🔴 In Progress</div>
+            <div class="countdown-class-name">${ongoing.name}</div>
+            <div class="countdown-class-detail">${ongoing.code} · ${ongoing.room} · Ends at ${formatHour(ongoing.endHour, ongoing.endMin)}</div>
+          </div>
+          <div class="countdown-timer">
+            <div class="countdown-unit">
+              <div class="countdown-unit-value">${String(h).padStart(2, '0')}</div>
+              <div class="countdown-unit-label">hrs</div>
+            </div>
+            <div class="countdown-separator">:</div>
+            <div class="countdown-unit">
+              <div class="countdown-unit-value">${String(m).padStart(2, '0')}</div>
+              <div class="countdown-unit-label">min</div>
+            </div>
+            <div class="countdown-separator">:</div>
+            <div class="countdown-unit">
+              <div class="countdown-unit-value">${String(s).padStart(2, '0')}</div>
+              <div class="countdown-unit-label">sec</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // Check for next upcoming class
+      const upcoming = todaySchedules.find(s => {
+        const start = s.startHour * 60 + s.startMin;
+        return currentMin < start;
+      });
+
+      if (upcoming) {
+        const startMin = upcoming.startHour * 60 + upcoming.startMin;
+        const diff = startMin - currentMin;
+        const h = Math.floor(diff / 60);
+        const m = diff % 60 - (now.getSeconds() > 0 ? 1 : 0);
+        const s = now.getSeconds() > 0 ? 60 - now.getSeconds() : 0;
+        const mAdj = m < 0 ? m + 60 : m;
+        const hAdj = m < 0 ? h - 1 : h;
+
+        banner.className = 'countdown-banner upcoming';
+        banner.innerHTML = `
+          <div class="countdown-left">
+            <div class="countdown-status upcoming">⏳ Up Next</div>
+            <div class="countdown-class-name">${upcoming.name}</div>
+            <div class="countdown-class-detail">${upcoming.code} · ${upcoming.room} · Starts at ${formatHour(upcoming.startHour, upcoming.startMin)}</div>
+          </div>
+          <div class="countdown-timer">
+            <div class="countdown-unit">
+              <div class="countdown-unit-value">${String(Math.max(0, hAdj)).padStart(2, '0')}</div>
+              <div class="countdown-unit-label">hrs</div>
+            </div>
+            <div class="countdown-separator">:</div>
+            <div class="countdown-unit">
+              <div class="countdown-unit-value">${String(Math.max(0, mAdj)).padStart(2, '0')}</div>
+              <div class="countdown-unit-label">min</div>
+            </div>
+            <div class="countdown-separator">:</div>
+            <div class="countdown-unit">
+              <div class="countdown-unit-value">${String(s).padStart(2, '0')}</div>
+              <div class="countdown-unit-label">sec</div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // All classes done
+      banner.className = 'countdown-banner';
+      banner.innerHTML = `
+        <div class="countdown-left">
+          <div class="countdown-status free">✅ Done for today</div>
+          <div class="countdown-class-name">All classes completed!</div>
+          <div class="countdown-class-detail">Great work today 🎉</div>
+        </div>
+      `;
+    }
+
+    function formatHour(h, m) {
+      const period = h >= 12 ? 'PM' : 'AM';
+      const dh = h > 12 ? h - 12 : h === 0 ? 12 : h;
+      return `${dh}:${String(m || 0).padStart(2, '0')} ${period}`;
+    }
+
+    // ═══════════════════════════════════════
+    //  CLASS REMINDER NOTIFICATIONS
+    // ═══════════════════════════════════════
+    let notificationsEnabled = false;
+    let notifiedClasses = new Set();
+
+    function toggleNotifications() {
+      if (!notificationsEnabled) {
+        if (!('Notification' in window)) {
+          showToast('⚠️ Notifications not supported in this browser');
+          return;
+        }
+        Notification.requestPermission().then(perm => {
+          if (perm === 'granted') {
+            notificationsEnabled = true;
+            document.getElementById('notifToggle').classList.add('active');
+            try { localStorage.setItem('notificationsEnabled', 'true'); } catch(e) {}
+            showToast('🔔 Reminders ON — 15 min before each class');
+          } else {
+            showToast('⚠️ Please allow notifications in browser settings');
+          }
+        });
+      } else {
+        notificationsEnabled = false;
+        document.getElementById('notifToggle').classList.remove('active');
+        try { localStorage.setItem('notificationsEnabled', 'false'); } catch(e) {}
+        showToast('🔕 Reminders turned off');
+      }
+    }
+
+    function checkReminders() {
+      if (!notificationsEnabled) return;
+
+      const now = new Date();
+      const currentMin = now.getHours() * 60 + now.getMinutes();
+      const todaySchedules = getTodaySchedules();
+
+      todaySchedules.forEach(sched => {
+        const startMin = sched.startHour * 60 + sched.startMin;
+        const diff = startMin - currentMin;
+        const key = `${sched.code}-${sched.startHour}`;
+
+        // Notify 15 minutes before
+        if (diff > 0 && diff <= 15 && !notifiedClasses.has(key)) {
+          notifiedClasses.add(key);
+          new Notification(`📚 ${sched.name}`, {
+            body: `Starts in ${diff} min · ${sched.room} · ${sched.time}`,
+            icon: '📅',
+            tag: key,
+            requireInteraction: false
+          });
+        }
+      });
+    }
+
+    // ═══════════════════════════════════════
+    //  PWA SUPPORT
+    // ═══════════════════════════════════════
+    let deferredPrompt = null;
+
+    // Inline manifest as data URI
+    function setupManifest() {
+      const manifest = {
+        name: 'Class Schedule — Khen Sorela',
+        short_name: 'My Schedule',
+        description: 'BSIT 4 Class Schedule, 1st Semester SY 2026-2027',
+        start_url: './index.html',
+        display: 'standalone',
+        background_color: '#0a0a0f',
+        theme_color: '#6c5ce7',
+        icons: [
+          {
+            src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%236c5ce7"/><text x="50" y="68" font-size="50" font-weight="bold" text-anchor="middle" fill="white">📅</text></svg>',
+            sizes: '192x192',
+            type: 'image/svg+xml'
+          }
+        ]
+      };
+      const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      document.getElementById('manifestLink').href = url;
+    }
+
+    function setupPWA() {
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        const dismissed = localStorage.getItem('pwaDismissed');
+        if (!dismissed) {
+          document.getElementById('pwaBanner').classList.add('show');
+        }
+      });
+
+      window.addEventListener('appinstalled', () => {
+        document.getElementById('pwaBanner').classList.remove('show');
+        deferredPrompt = null;
+        showToast('✅ App installed! Find it on your home screen');
+      });
+    }
+
+    function installPWA() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(result => {
+          if (result.outcome === 'accepted') {
+            showToast('✅ Installing...');
+          }
+          deferredPrompt = null;
+          document.getElementById('pwaBanner').classList.remove('show');
+        });
+      }
+    }
+
+    function dismissPWA() {
+      document.getElementById('pwaBanner').classList.remove('show');
+      try { localStorage.setItem('pwaDismissed', 'true'); } catch(e) {}
+    }
+
+    // Register Service Worker for offline PWA
+    function registerSW() {
+      if ('serviceWorker' in navigator) {
+        // Create inline service worker
+        const swCode = `
+          const CACHE = 'schedule-v1';
+          const ASSETS = ['./', './index.html'];
+          self.addEventListener('install', e => {
+            e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+            self.skipWaiting();
+          });
+          self.addEventListener('activate', e => {
+            e.waitUntil(clients.claim());
+          });
+          self.addEventListener('fetch', e => {
+            e.respondWith(
+              caches.match(e.request).then(r => r || fetch(e.request).then(resp => {
+                const clone = resp.clone();
+                caches.open(CACHE).then(c => c.put(e.request, clone));
+                return resp;
+              }))
+            );
+          });
+        `;
+        const blob = new Blob([swCode], { type: 'application/javascript' });
+        const swUrl = URL.createObjectURL(blob);
+        navigator.serviceWorker.register(swUrl).catch(() => {});
+      }
+    }
 
     // ─── Render Schedule Cards ───
     function renderCards(filter = 'all') {
@@ -1451,9 +2168,25 @@
 
     // ─── Init ───
     function init() {
+      // Restore theme
+      try {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) applyTheme(savedTheme);
+      } catch(e) {}
+
+      // Restore notification preference
+      try {
+        const notifPref = localStorage.getItem('notificationsEnabled');
+        if (notifPref === 'true' && 'Notification' in window && Notification.permission === 'granted') {
+          notificationsEnabled = true;
+          document.getElementById('notifToggle').classList.add('active');
+        }
+      } catch(e) {}
+
       renderCards();
       highlightToday();
       buildTimetable();
+      updateCountdown();
 
       // Restore persisted tab
       try {
@@ -1462,6 +2195,23 @@
           switchView(saved);
         }
       } catch(e) {}
+
+      // PWA
+      setupManifest();
+      setupPWA();
+      registerSW();
+
+      // Live timers
+      setInterval(updateCountdown, 1000);
+      setInterval(checkReminders, 30000); // Check reminders every 30s
+
+      // Reset notified classes at midnight
+      const now = new Date();
+      const msUntilMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).getTime() - now.getTime();
+      setTimeout(() => {
+        notifiedClasses.clear();
+        setInterval(() => notifiedClasses.clear(), 86400000);
+      }, msUntilMidnight);
     }
 
     init();
