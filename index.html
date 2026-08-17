@@ -981,7 +981,65 @@
       box-shadow: inset 0 0 0 1px rgba(0, 206, 201, 0.45), 0 0 12px rgba(0, 206, 201, 0.15);
     }
 
-    /* Hybrid Summary Badge in filter bar */
+    /* Hybrid Summary & Batch Actions in filter bar */
+    .filter-actions-group {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .batch-mode-toggle {
+      display: inline-flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 100px;
+      padding: 3px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+    }
+
+    .batch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .batch-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .batch-btn:active {
+      transform: scale(0.95);
+    }
+
+    .batch-btn.f2f:hover {
+      color: var(--accent-6);
+      background: rgba(85, 239, 196, 0.12);
+    }
+
+    .batch-btn.online:hover {
+      color: var(--accent-4);
+      background: rgba(0, 206, 201, 0.12);
+    }
+
+    html.light .batch-btn:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
     .hybrid-summary-badge {
       display: inline-flex;
       align-items: center;
@@ -993,7 +1051,6 @@
       font-size: 12px;
       font-weight: 500;
       color: var(--text-secondary);
-      margin-left: auto;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       white-space: nowrap;
@@ -1223,12 +1280,29 @@
       transform: scale(0.98);
     }
 
-    .timeline-card.theme-purple { border-left-color: #6c5ce7; }
-    .timeline-card.theme-pink { border-left-color: #fd79a8; }
-    .timeline-card.theme-teal { border-left-color: #00cec9; }
-    .timeline-card.theme-gold { border-left-color: #ffb300; }
-    .timeline-card.theme-green { border-left-color: #00b894; }
-    .timeline-card.theme-red { border-left-color: #e17055; }
+    .timeline-card.theme-purple {
+      border-left-color: #6c5ce7;
+    }
+
+    .timeline-card.theme-pink {
+      border-left-color: #fd79a8;
+    }
+
+    .timeline-card.theme-teal {
+      border-left-color: #00cec9;
+    }
+
+    .timeline-card.theme-gold {
+      border-left-color: #ffb300;
+    }
+
+    .timeline-card.theme-green {
+      border-left-color: #00b894;
+    }
+
+    .timeline-card.theme-red {
+      border-left-color: #e17055;
+    }
 
     .timeline-card.is-online {
       box-shadow: inset 0 0 0 1px rgba(0, 206, 201, 0.3), 0 4px 15px rgba(0, 206, 201, 0.1);
@@ -2124,12 +2198,29 @@
       background: var(--gradient-1);
     }
 
-    .modal-dialog.theme-purple .modal-top-accent { background: linear-gradient(90deg, #6c5ce7, #a29bfe); }
-    .modal-dialog.theme-pink .modal-top-accent { background: linear-gradient(90deg, #fd79a8, #e17055); }
-    .modal-dialog.theme-teal .modal-top-accent { background: linear-gradient(90deg, #00cec9, #81ecec); }
-    .modal-dialog.theme-gold .modal-top-accent { background: linear-gradient(90deg, #ffb300, #ffeaa7); }
-    .modal-dialog.theme-green .modal-top-accent { background: linear-gradient(90deg, #00b894, #55efc4); }
-    .modal-dialog.theme-red .modal-top-accent { background: linear-gradient(90deg, #e17055, #fab1a0); }
+    .modal-dialog.theme-purple .modal-top-accent {
+      background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    }
+
+    .modal-dialog.theme-pink .modal-top-accent {
+      background: linear-gradient(90deg, #fd79a8, #e17055);
+    }
+
+    .modal-dialog.theme-teal .modal-top-accent {
+      background: linear-gradient(90deg, #00cec9, #81ecec);
+    }
+
+    .modal-dialog.theme-gold .modal-top-accent {
+      background: linear-gradient(90deg, #ffb300, #ffeaa7);
+    }
+
+    .modal-dialog.theme-green .modal-top-accent {
+      background: linear-gradient(90deg, #00b894, #55efc4);
+    }
+
+    .modal-dialog.theme-red .modal-top-accent {
+      background: linear-gradient(90deg, #e17055, #fab1a0);
+    }
 
     .modal-body {
       padding: 24px;
@@ -2380,7 +2471,8 @@
         <div class="header-top-left">
           <div class="uni-badge">
             <div class="uni-icon">
-              <img src="./ctu-logo.png" alt="CTU Logo" class="uni-logo-img" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.innerText='CTU';">
+              <img src="./ctu-logo.png" alt="CTU Logo" class="uni-logo-img"
+                onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.innerText='CTU';">
             </div>
             <span class="uni-name">Cebu Technological University — Main Campus</span>
           </div>
@@ -2493,7 +2585,32 @@
         <button class="day-pill" data-day="W" onclick="filterDay('W')">Wednesday</button>
         <button class="day-pill" data-day="Th" onclick="filterDay('Th')">Thursday</button>
         <button class="day-pill" data-day="F" onclick="filterDay('F')">Friday</button>
-        <div class="hybrid-summary-badge" id="hybridSummaryBadge"></div>
+
+        <div class="filter-actions-group">
+          <div class="batch-mode-toggle" id="batchModeToggle">
+            <button type="button" class="batch-btn f2f" onclick="setAllSubjectModes('f2f')"
+              title="Set all subjects to Face-to-Face">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 10 3 12 0v-5"></path>
+              </svg>
+              <span>All F2F</span>
+            </button>
+            <button type="button" class="batch-btn online" onclick="setAllSubjectModes('online')"
+              title="Set all subjects to Online">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                </path>
+              </svg>
+              <span>All Online</span>
+            </button>
+          </div>
+          <div class="hybrid-summary-badge" id="hybridSummaryBadge"></div>
+        </div>
       </div>
 
       <div class="schedule-grid" id="scheduleGrid"></div>
@@ -2504,8 +2621,10 @@
       <div class="timetable-header-row">
         <h2 class="section-title" style="margin-bottom: 0;">Weekly Timetable</h2>
         <div class="timetable-mode-switch" id="timetableModeSwitch">
-          <button type="button" class="mode-switch-btn active" id="ttModeTimelineBtn" onclick="switchTimetableMode('timeline')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button type="button" class="mode-switch-btn active" id="ttModeTimelineBtn"
+            onclick="switchTimetableMode('timeline')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="8" y1="6" x2="21" y2="6"></line>
               <line x1="8" y1="12" x2="21" y2="12"></line>
               <line x1="8" y1="18" x2="21" y2="18"></line>
@@ -2516,7 +2635,8 @@
             <span>Day Timeline</span>
           </button>
           <button type="button" class="mode-switch-btn" id="ttModeGridBtn" onclick="switchTimetableMode('grid')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="3" y1="9" x2="21" y2="9"></line>
               <line x1="3" y1="15" x2="21" y2="15"></line>
@@ -2828,6 +2948,26 @@
       updateHybridSummary();
     }
 
+    function setAllSubjectModes(mode) {
+      const modes = {};
+      subjects.forEach(sub => {
+        modes[sub.code] = mode;
+      });
+      try {
+        localStorage.setItem('subject_modes', JSON.stringify(modes));
+      } catch (e) { }
+
+      const modeText = mode === 'online' ? '🌐 All 6 subjects set to Online' : '🏫 All 6 subjects set to Face-to-Face (F2F)';
+      showToast(modeText);
+
+      renderCards(currentDayFilter);
+      highlightToday();
+      buildTimetable();
+      buildTimeline(currentTimelineDay);
+      updateCountdown();
+      updateHybridSummary();
+    }
+
     function updateHybridSummary() {
       const modes = getSubjectModes();
       let onlineCount = 0;
@@ -2914,7 +3054,7 @@
         const m = diff % 60;
         const s = 59 - now.getSeconds();
         const isOnline = ongoing.mode === 'online';
-        const locDetail = isOnline 
+        const locDetail = isOnline
           ? `<span class="mode-tag-online">🌐 Online Class (${ongoing.room})</span>`
           : `${ongoing.room}`;
 
@@ -2960,7 +3100,7 @@
         const mAdj = m < 0 ? m + 60 : m;
         const hAdj = m < 0 ? h - 1 : h;
         const isOnline = upcoming.mode === 'online';
-        const locDetail = isOnline 
+        const locDetail = isOnline
           ? `<span class="mode-tag-online">🌐 Online Class (${upcoming.room})</span>`
           : `${upcoming.room}`;
 
