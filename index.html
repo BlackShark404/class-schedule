@@ -11,6 +11,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="My Schedule">
+  <link rel="icon" type="image/png" href="./ctu-logo.png">
   <link rel="manifest" id="manifestLink">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -215,7 +216,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 8px 16px 8px 8px;
+      padding: 6px 16px 6px 8px;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 100px;
@@ -229,14 +230,35 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: var(--gradient-1);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-accent);
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    html.light .uni-icon {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .uni-icon.fallback {
+      background: var(--gradient-1) !important;
       font-size: 11px;
       font-weight: 800;
       color: white;
       letter-spacing: -0.02em;
+    }
+
+    .uni-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 2px;
+      display: block;
     }
 
     .uni-name {
@@ -1492,10 +1514,23 @@
       font-size: 13px;
     }
 
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .footer-logo-img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
     .footer-uni {
       font-weight: 600;
       color: var(--text-secondary);
-      margin-bottom: 4px;
     }
 
     /* ─── Animations ─── */
@@ -1853,7 +1888,9 @@
       <div class="header-top">
         <div class="header-top-left">
           <div class="uni-badge">
-            <div class="uni-icon">CTU</div>
+            <div class="uni-icon">
+              <img src="./ctu-logo.png" alt="CTU Logo" class="uni-logo-img" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.innerText='CTU';">
+            </div>
             <span class="uni-name">Cebu Technological University — Main Campus</span>
           </div>
           <div class="semester-badge">1st Semester · SY 2026–2027</div>
@@ -2067,7 +2104,10 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="footer-uni">Cebu Technological University — Main Campus</div>
+      <div class="footer-brand">
+        <img src="./ctu-logo.png" alt="CTU Logo" class="footer-logo-img" onerror="this.style.display='none'">
+        <div class="footer-uni">Cebu Technological University — Main Campus</div>
+      </div>
       <div>M. J. Cuenco Avenue Cor. R. Palma Street, Cebu City, Philippines</div>
     </footer>
 
@@ -2516,9 +2556,9 @@
         theme_color: '#6c5ce7',
         icons: [
           {
-            src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%236c5ce7"/><text x="50" y="68" font-size="50" font-weight="bold" text-anchor="middle" fill="white">📅</text></svg>',
-            sizes: '192x192',
-            type: 'image/svg+xml'
+            src: './ctu-logo.png',
+            sizes: '500x500',
+            type: 'image/png'
           }
         ]
       };
@@ -2567,8 +2607,8 @@
       if ('serviceWorker' in navigator) {
         // Create inline service worker
         const swCode = `
-          const CACHE = 'schedule-v1';
-          const ASSETS = ['./', './index.html'];
+          const CACHE = 'schedule-v2';
+          const ASSETS = ['./', './index.html', './ctu-logo.png'];
           self.addEventListener('install', e => {
             e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
             self.skipWaiting();
