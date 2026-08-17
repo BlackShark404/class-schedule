@@ -493,12 +493,12 @@
       font-family: inherit;
     }
 
-    .nav-tab:hover {
+    .nav-tab:not(.active):hover {
       color: var(--text-primary);
       background: rgba(255, 255, 255, 0.04);
     }
 
-    html.light .nav-tab:hover {
+    html.light .nav-tab:not(.active):hover {
       background: rgba(0, 0, 0, 0.04);
     }
 
@@ -1043,7 +1043,7 @@
       font-family: inherit;
     }
 
-    .day-pill:hover {
+    .day-pill:not(.active):hover {
       color: var(--text-primary);
       border-color: var(--border-accent);
     }
