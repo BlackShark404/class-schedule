@@ -7,7 +7,10 @@
             <img src="/ctu-logo.png" alt="CTU Logo" class="uni-logo-img"
               @error="e => { e.target.style.display='none'; e.target.parentElement.classList.add('fallback'); e.target.parentElement.innerText='CTU' }">
           </div>
-          <span class="uni-name">Cebu Technological University — Main Campus</span>
+          <span class="uni-name">
+            <span class="uni-name-full">Cebu Technological University — Main Campus</span>
+            <span class="uni-name-short">CTU Main Campus</span>
+          </span>
         </div>
         <div class="semester-badge">1st Semester · SY 2026–2027</div>
       </div>
