@@ -363,7 +363,110 @@ html.light .fee-item:hover { background: rgba(0, 0, 0, 0.02); }
 .today-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
 .today-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent-6); animation: pulse 2s ease-in-out infinite; box-shadow: 0 0 10px rgba(85, 239, 196, 0.5); }
 .today-label { font-size: 14px; font-weight: 600; color: var(--accent-6); text-transform: uppercase; letter-spacing: 0.06em; }
-.no-class-today { padding: 24px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); text-align: center; color: var(--text-secondary); font-size: 14px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); transition: background 0.3s, border-color 0.3s; }
+.no-class-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 26px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.no-class-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gradient-4);
+  border-radius: 4px 0 0 4px;
+}
+
+.no-class-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.no-class-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 234, 167, 0.12);
+  border: 1px solid rgba(255, 234, 167, 0.25);
+  color: var(--accent-5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+html.light .no-class-icon-wrapper {
+  background: rgba(216, 150, 0, 0.1);
+  border-color: rgba(216, 150, 0, 0.25);
+  color: #b88100;
+}
+
+.no-class-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.no-class-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.no-class-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.text-primary-highlight {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.no-class-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  width: fit-content;
+}
+
+html.light .no-class-badge {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+@media (max-width: 600px) {
+  .no-class-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px;
+    gap: 14px;
+  }
+}
 
 /* ─── Day Filter Pills ─── */
 .day-filter { display: flex; align-items: center; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 4px 2px; max-width: 100%; }
