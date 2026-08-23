@@ -49,13 +49,17 @@
                   title="Tap to view full class details"
                 >
                   <div class="block-top-row">
-                    <span class="block-code">{{ getBlock(hour, day).code }}</span>
-                    <div class="timetable-mode-badge" :class="getMode(getBlock(hour, day).code) === 'online' ? 'online' : 'f2f'">
+                    <span class="block-code" :title="getBlock(hour, day).code">{{ getBlock(hour, day).code }}</span>
+                    <div
+                      class="timetable-mode-badge"
+                      :class="getMode(getBlock(hour, day).code) === 'online' ? 'online' : 'f2f'"
+                      :title="getMode(getBlock(hour, day).code) === 'online' ? 'Online Class' : 'Face-to-Face Class'"
+                    >
                       <template v-if="getMode(getBlock(hour, day).code) === 'online'">
-                        <Globe :size="9" /> Online
+                        <Globe :size="10" /> <span class="badge-mode-text">Online</span>
                       </template>
                       <template v-else>
-                        <School :size="9" /> F2F
+                        <School :size="10" /> <span class="badge-mode-text">F2F</span>
                       </template>
                     </div>
                   </div>
