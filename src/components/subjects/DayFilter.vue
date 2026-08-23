@@ -13,11 +13,11 @@
 
     <div class="filter-actions-group">
       <div class="batch-mode-toggle">
-        <button type="button" class="batch-btn f2f" @click="setAllModes('f2f')" title="Set all subjects to Face-to-Face">
+        <button type="button" class="batch-btn f2f" @click="handleSetAll('f2f')" title="Set all subjects to Face-to-Face">
           <School :size="13" />
           <span>All F2F</span>
         </button>
-        <button type="button" class="batch-btn online" @click="setAllModes('online')" title="Set all subjects to Online">
+        <button type="button" class="batch-btn online" @click="handleSetAll('online')" title="Set all subjects to Online">
           <Globe :size="13" />
           <span>All Online</span>
         </button>
@@ -41,10 +41,20 @@
 import { School, Globe } from '@lucide/vue'
 import { dayList, dayLabels, dayShort } from '../../data/schedule.js'
 import { useSubjectModes } from '../../composables/useSubjectModes.js'
+import { toast } from 'vue-sonner'
 
 defineProps({ modelValue: String })
 defineEmits(['update:modelValue'])
 
 const { setAllModes, summary } = useSubjectModes()
 const todayCode = dayShort[new Date().getDay()]
+
+function handleSetAll(mode) {
+  setAllModes(mode)
+  if (mode === 'online') {
+    toast.success('All set to Online', { description: 'Your schedule has been updated to fully virtual.' })
+  } else {
+    toast.success('All set to F2F', { description: 'Your schedule has been updated to face-to-face.' })
+  }
+}
 </script>

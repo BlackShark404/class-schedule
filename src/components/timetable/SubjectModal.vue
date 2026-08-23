@@ -24,10 +24,10 @@
               <span>Class Delivery Mode</span>
             </div>
             <div class="mode-toggle" role="group" aria-label="Class Mode">
-              <button type="button" class="mode-btn f2f" :class="{ active: !isOnline }" @click="setMode(subject.code, 'f2f')">
+              <button type="button" class="mode-btn f2f" :class="{ active: !isOnline }" @click="handleSetMode('f2f')">
                 <School :size="12" /><span>F2F</span>
               </button>
-              <button type="button" class="mode-btn online" :class="{ active: isOnline }" @click="setMode(subject.code, 'online')">
+              <button type="button" class="mode-btn online" :class="{ active: isOnline }" @click="handleSetMode('online')">
                 <Globe :size="12" /><span>Online</span>
               </button>
             </div>
@@ -80,6 +80,7 @@ import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { X, Globe, School, User, CalendarDays, Clock, Video, MapPin, Hourglass } from '@lucide/vue'
 import { subjects } from '../../data/schedule.js'
 import { useSubjectModes } from '../../composables/useSubjectModes.js'
+import { toast } from 'vue-sonner'
 
 const props = defineProps({
   subjectCode: String,
@@ -97,6 +98,16 @@ const schedule = computed(() => {
   return subject.value.schedules.find(s => s.day === props.day) || subject.value.schedules[0]
 })
 const isOnline = computed(() => subject.value ? getMode(subject.value.code) === 'online' : false)
+
+function handleSetMode(newMode) {
+  if (!subject.value) return
+  setMode(subject.value.code, newMode)
+  if (newMode === 'online') {
+    toast(`Set to Online: ${subject.value.code}`, { description: 'Classes will be held virtually' })
+  } else {
+    toast(`Set to F2F: ${subject.value.code}`, { description: `Room ${schedule.value.room}` })
+  }
+}
 
 function close() {
   emit('close')

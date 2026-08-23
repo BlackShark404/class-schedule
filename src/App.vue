@@ -36,13 +36,14 @@
     @jump-to-cards="jumpToCards"
   />
 
-  <!-- Toast -->
-  <div class="toast" :class="{ show: toastVisible }">{{ toastMessage }}</div>
+  <Toaster position="bottom-center" theme="dark" richColors />
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { dayShort } from './data/schedule.js'
+import { Toaster, toast } from 'vue-sonner'
+import 'vue-sonner/style.css'
 
 import BackgroundEffects from './components/layout/BackgroundEffects.vue'
 import AppHeader from './components/layout/AppHeader.vue'
@@ -86,15 +87,7 @@ function jumpToCards(code, day) {
   dayFilter.value = day
 }
 
-// ─── Toast ───
-const toastMessage = ref('')
-const toastVisible = ref(false)
-let toastTimer = null
-
-function showToast(message, duration = 3000) {
-  toastMessage.value = message
-  toastVisible.value = true
-  if (toastTimer) clearTimeout(toastTimer)
-  toastTimer = setTimeout(() => { toastVisible.value = false }, duration)
+function showToast(message) {
+  toast(message)
 }
 </script>

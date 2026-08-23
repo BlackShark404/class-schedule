@@ -7,11 +7,11 @@
           <div class="card-code">{{ subject.code }}{{ typeLabel }}</div>
           <div class="mode-toggle" role="group" aria-label="Class Mode">
             <button type="button" class="mode-btn f2f" :class="{ active: mode === 'f2f' }"
-              @click.stop="setMode(subject.code, 'f2f')" title="Set to Face-to-Face (F2F)">
+              @click.stop="handleSetMode('f2f')" title="Set to Face-to-Face (F2F)">
               <School :size="12" /><span>F2F</span>
             </button>
             <button type="button" class="mode-btn online" :class="{ active: mode === 'online' }"
-              @click.stop="setMode(subject.code, 'online')" title="Set to Online">
+              @click.stop="handleSetMode('online')" title="Set to Online">
               <Globe :size="12" /><span>Online</span>
             </button>
           </div>
@@ -52,6 +52,7 @@
 import { computed } from 'vue'
 import { School, Globe, User, Clock, CalendarDays, MapPin, Video } from '@lucide/vue'
 import { useSubjectModes } from '../../composables/useSubjectModes.js'
+import { toast } from 'vue-sonner'
 
 const props = defineProps({
   subject: Object,
@@ -61,4 +62,13 @@ const props = defineProps({
 const { getMode, setMode } = useSubjectModes()
 const mode = computed(() => getMode(props.subject.code))
 const typeLabel = computed(() => props.subject.type ? ` · ${props.subject.type}` : '')
+
+function handleSetMode(newMode) {
+  setMode(props.subject.code, newMode)
+  if (newMode === 'online') {
+    toast(`Set to Online: ${props.subject.code}`, { description: 'Classes will be held virtually' })
+  } else {
+    toast(`Set to F2F: ${props.subject.code}`, { description: `Room ${props.schedule.room}` })
+  }
+}
 </script>

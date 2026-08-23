@@ -42,22 +42,21 @@
 import { Moon, Sun, Bell, BellOff, GraduationCap } from '@lucide/vue'
 import { useTheme } from '../../composables/useTheme.js'
 import { useNotifications } from '../../composables/useNotifications.js'
+import { toast } from 'vue-sonner'
 
 const { isDark, toggleTheme } = useTheme()
 const { enabled: notifEnabled, toggle: toggleNotif } = useNotifications()
 
-const emit = defineEmits(['toast'])
-
 function handleThemeToggle() {
   const mode = toggleTheme()
-  emit('toast', mode === 'light' ? '☀️ Light mode' : '🌙 Dark mode')
+  toast(mode === 'light' ? '☀️ Light mode' : '🌙 Dark mode')
 }
 
 async function handleNotifToggle() {
   const result = await toggleNotif()
-  if (result === 'enabled') emit('toast', '🔔 Reminders ON — 15 min before each class')
-  else if (result === 'disabled') emit('toast', '🔕 Reminders turned off')
-  else if (result === 'unsupported') emit('toast', '⚠️ Notifications not supported in this browser')
-  else if (result === 'denied') emit('toast', '⚠️ Please allow notifications in browser settings')
+  if (result === 'enabled') toast.success('🔔 Reminders ON — 15 min before each class')
+  else if (result === 'disabled') toast('🔕 Reminders turned off')
+  else if (result === 'unsupported') toast.error('⚠️ Notifications not supported in this browser')
+  else if (result === 'denied') toast.error('⚠️ Please allow notifications in browser settings')
 }
 </script>

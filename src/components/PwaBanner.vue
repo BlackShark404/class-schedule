@@ -14,8 +14,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { Smartphone } from '@lucide/vue'
+import { toast } from 'vue-sonner'
 
-const emit = defineEmits(['toast'])
 const visible = ref(false)
 let deferredPrompt = null
 
@@ -30,7 +30,7 @@ onMounted(() => {
   window.addEventListener('appinstalled', () => {
     visible.value = false
     deferredPrompt = null
-    emit('toast', '✅ App installed! Find it on your home screen')
+    toast.success('✅ App installed! Find it on your home screen')
   })
 })
 
@@ -38,12 +38,12 @@ function install() {
   if (deferredPrompt) {
     deferredPrompt.prompt()
     deferredPrompt.userChoice.then(result => {
-      if (result.outcome === 'accepted') emit('toast', '⬇️ Installing...')
+      if (result.outcome === 'accepted') toast('⬇️ Installing...')
       deferredPrompt = null
       visible.value = false
     })
   } else {
-    emit('toast', 'Tip: Tap your browser menu (⋮ or Share) → "Add to Home screen" / "Install"')
+    toast('Tip: Tap your browser menu (⋮ or Share) → "Add to Home screen" / "Install"')
   }
 }
 
