@@ -147,7 +147,7 @@ html.light .uni-icon { background: rgba(0, 0, 0, 0.04); border-color: rgba(0, 0,
 .countdown-banner.ongoing { border-color: rgba(253, 121, 168, 0.25); }
 .countdown-banner.upcoming { border-color: rgba(85, 239, 196, 0.2); }
 .countdown-left { display: flex; flex-direction: column; gap: 4px; }
-.countdown-status { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.countdown-status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 .countdown-status.ongoing { color: var(--accent-3); }
 .countdown-status.upcoming { color: var(--accent-6); }
 .countdown-status.free { color: var(--accent-5); }
@@ -161,7 +161,7 @@ html.light .uni-icon { background: rgba(0, 0, 0, 0.04); border-color: rgba(0, 0,
 
 /* ─── Navigation Tabs ─── */
 .nav-tabs { display: flex; gap: 4px; padding: 4px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); margin-bottom: 32px; animation: fadeInUp 0.8s ease-out 0.3s both; width: fit-content; transition: background 0.3s, border-color 0.3s; }
-.nav-tab { padding: 10px 24px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; color: var(--text-secondary); cursor: pointer; transition: all 0.3s ease; border: none; background: none; font-family: inherit; }
+.nav-tab { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 24px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; color: var(--text-secondary); cursor: pointer; transition: all 0.3s ease; border: none; background: none; font-family: inherit; }
 .nav-tab:not(.active):hover { color: var(--text-primary); background: rgba(255, 255, 255, 0.04); }
 html.light .nav-tab:not(.active):hover { background: rgba(0, 0, 0, 0.04); }
 .nav-tab.active { background: var(--accent-1); color: white; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4); }
@@ -269,7 +269,7 @@ html.light .hybrid-summary-badge { background: rgba(0, 0, 0, 0.03); }
 .badge-dot.f2f { background: var(--accent-6); box-shadow: 0 0 6px rgba(85, 239, 196, 0.6); }
 .badge-dot.online { background: var(--accent-4); box-shadow: 0 0 6px rgba(0, 206, 201, 0.6); }
 .badge-dot.hybrid { background: var(--accent-2); box-shadow: 0 0 6px rgba(162, 155, 254, 0.6); }
-.mode-tag-online { color: var(--accent-4); font-weight: 600; }
+.mode-tag-online { display: inline-flex; align-items: center; gap: 4px; color: var(--accent-4); font-weight: 600; }
 
 /* ─── Timetable Header & Mode Switch ─── */
 .timetable-header-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
@@ -323,7 +323,7 @@ html.light .timetable thead th { background: rgba(0, 0, 0, 0.02); }
 .timetable-block .block-code { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; margin-bottom: 3px; }
 .timetable-block .block-name { font-weight: 500; font-size: 11px; opacity: 1; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .timetable-block .block-prof { font-size: 10.5px; font-weight: 500; opacity: 0.9; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.timetable-block .block-room { font-size: 11px; opacity: 0.9; margin-top: 3px; }
+.timetable-block .block-room { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; opacity: 0.9; margin-top: 3px; }
 
 /* Timetable block colors */
 .block-purple { background: linear-gradient(135deg, rgba(108, 92, 231, 0.35), rgba(162, 155, 254, 0.25)); border: 1px solid rgba(108, 92, 231, 0.5); color: #ddd8ff; }

@@ -68,7 +68,7 @@ export function useCountdown() {
       minutes.value = diff % 60
       seconds.value = 59 - now.getSeconds()
       const isOnline = ongoing.mode === 'online'
-      detail.value = `${ongoing.code} · ${ongoing.instructor} · ${isOnline ? '🌐 Online (' + ongoing.room + ')' : ongoing.room} · Ends at ${formatHour(ongoing.endHour, ongoing.endMin)}`
+      detail.value = `${ongoing.code} · ${ongoing.instructor} · ${isOnline ? '<span class="mode-tag-online">Online (' + ongoing.room + ')</span>' : ongoing.room} · Ends at ${formatHour(ongoing.endHour, ongoing.endMin)}`
       return
     }
 
@@ -91,7 +91,7 @@ export function useCountdown() {
       minutes.value = Math.max(0, m)
       seconds.value = s
       const isOnline = upcoming.mode === 'online'
-      detail.value = `${upcoming.code} · ${upcoming.instructor} · ${isOnline ? '🌐 Online (' + upcoming.room + ')' : upcoming.room} · Starts at ${formatHour(upcoming.startHour, upcoming.startMin)}`
+      detail.value = `${upcoming.code} · ${upcoming.instructor} · ${isOnline ? '<span class="mode-tag-online">Online (' + upcoming.room + ')</span>' : upcoming.room} · Starts at ${formatHour(upcoming.startHour, upcoming.startMin)}`
       return
     }
 

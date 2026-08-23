@@ -53,7 +53,7 @@
                 Location
               </div>
               <div class="modal-info-value">
-                <span v-if="isOnline" class="mode-tag-online">🌐 Online ({{ schedule.room }})</span>
+                <span v-if="isOnline" class="mode-tag-online"><Globe :size="13" /> Online ({{ schedule.room }})</span>
                 <span v-else>{{ schedule.room }}</span>
               </div>
             </div>

@@ -1,13 +1,14 @@
 <template>
   <div class="nav-tabs">
     <button
-      v-for="tab in tabs" :key="tab.id"
+      v-for="tab in tabs"
+      :key="tab.id"
       class="nav-tab"
       :class="{ active: modelValue === tab.id }"
       @click="$emit('update:modelValue', tab.id)"
     >
-      <component :is="tab.icon" :size="14" style="vertical-align: -2px; margin-right: 4px;" />
-      {{ tab.label }}
+      <component :is="tab.icon" :size="15" />
+      <span>{{ tab.label }}</span>
     </button>
   </div>
 </template>

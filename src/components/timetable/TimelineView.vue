@@ -2,7 +2,8 @@
   <div class="timetable-timeline-view active">
     <div class="timeline-day-selector">
       <button
-        v-for="d in dayList" :key="d"
+        v-for="d in dayList"
+        :key="d"
         class="timeline-day-btn"
         :class="{ active: selectedDay === d, 'is-today': d === todayCode }"
         @click="selectedDay = d"
@@ -12,7 +13,7 @@
     <div class="timeline-content">
       <!-- Empty -->
       <div v-if="daySubjects.length === 0" class="timeline-empty">
-        <div style="font-size: 28px; margin-bottom: 8px;">🎉</div>
+        <Sparkles :size="32" style="color: var(--accent-5); margin: 0 auto 8px auto;" />
         <div style="font-weight: 600; color: var(--text-secondary); margin-bottom: 4px;">No classes scheduled for this day</div>
         <div style="font-size: 12px;">Take a well-deserved break!</div>
       </div>
@@ -69,7 +70,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { Globe, School, User, Clock, Video, MapPin } from '@lucide/vue'
+import { Globe, School, User, Clock, Video, MapPin, Sparkles } from '@lucide/vue'
 import { subjects, dayList, dayAbbrev, dayShort, formatHour } from '../../data/schedule.js'
 import { useSubjectModes } from '../../composables/useSubjectModes.js'
 

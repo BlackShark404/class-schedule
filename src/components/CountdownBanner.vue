@@ -3,7 +3,7 @@
     <!-- Free day -->
     <template v-if="state === 'free'">
       <div class="countdown-left">
-        <div class="countdown-status free"><Star :size="14" style="vertical-align: -2px; margin-right: 2px;" /> Free Day</div>
+        <div class="countdown-status free"><Star :size="14" /> <span>Free Day</span></div>
         <div class="countdown-class-name">No classes scheduled today</div>
         <div class="countdown-class-detail">Enjoy your day off!</div>
       </div>
@@ -12,7 +12,7 @@
     <!-- Ongoing -->
     <template v-else-if="state === 'ongoing' && currentClass">
       <div class="countdown-left">
-        <div class="countdown-status ongoing"><Activity :size="14" style="vertical-align: -2px; margin-right: 2px;" /> In Progress</div>
+        <div class="countdown-status ongoing"><Activity :size="14" /> <span>In Progress</span></div>
         <div class="countdown-class-name">{{ currentClass.name }}</div>
         <div class="countdown-class-detail" v-html="detail"></div>
       </div>
@@ -37,7 +37,7 @@
     <!-- Upcoming -->
     <template v-else-if="state === 'upcoming' && currentClass">
       <div class="countdown-left">
-        <div class="countdown-status upcoming"><Hourglass :size="14" style="vertical-align: -2px; margin-right: 2px;" /> Up Next</div>
+        <div class="countdown-status upcoming"><Hourglass :size="14" /> <span>Up Next</span></div>
         <div class="countdown-class-name">{{ currentClass.name }}</div>
         <div class="countdown-class-detail" v-html="detail"></div>
       </div>
@@ -62,7 +62,7 @@
     <!-- Done -->
     <template v-else-if="state === 'done'">
       <div class="countdown-left">
-        <div class="countdown-status free"><CheckCircle :size="14" style="vertical-align: -2px; margin-right: 2px;" /> Done for today</div>
+        <div class="countdown-status free"><CheckCircle :size="14" /> <span>Done for today</span></div>
         <div class="countdown-class-name">All classes completed!</div>
         <div class="countdown-class-detail">Great work today!</div>
       </div>
