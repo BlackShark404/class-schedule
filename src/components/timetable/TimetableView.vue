@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { List, LayoutGrid } from '@lucide/vue'
 import TimelineView from './TimelineView.vue'
 import TimetableGrid from './TimetableGrid.vue'
@@ -27,4 +27,10 @@ defineEmits(['openModal'])
 
 const saved = (() => { try { return localStorage.getItem('timetableMode') } catch { return null } })()
 const mode = ref(saved || (window.innerWidth < 768 ? 'timeline' : 'grid'))
+
+watch(mode, (newVal) => {
+  try {
+    localStorage.setItem('timetableMode', newVal)
+  } catch (e) {}
+})
 </script>

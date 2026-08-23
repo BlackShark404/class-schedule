@@ -1,69 +1,118 @@
 <template>
-  <div class="timetable-wrapper">
-    <table class="timetable">
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wed</th>
-          <th>Thu</th>
-          <th>Fri</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="hour in hours" :key="hour">
-          <td>{{ formatTimeLabel(hour) }}</td>
-          <template v-for="day in days" :key="day">
-            <td v-if="getBlock(hour, day)" :rowspan="getBlock(hour, day).rowSpan">
-              <div
-                class="timetable-block"
-                :class="[getBlock(hour, day).blockClass, { 'is-online': getMode(getBlock(hour, day).code) === 'online' }]"
-                @click="$emit('openModal', getBlock(hour, day).code, day)"
-                role="button"
-                tabindex="0"
-                title="Tap to view full class details"
-              >
-                <div class="block-code">{{ getBlock(hour, day).code }}</div>
-                <div class="block-name">{{ getBlock(hour, day).name }}</div>
-                <div class="block-prof">{{ getBlock(hour, day).instructor }}</div>
-                <div class="timetable-mode-badge" :class="getMode(getBlock(hour, day).code) === 'online' ? 'online' : 'f2f'">
-                  <template v-if="getMode(getBlock(hour, day).code) === 'online'">
-                    <Globe :size="9" /> Online
-                  </template>
-                  <template v-else>
-                    <School :size="9" /> F2F
-                  </template>
-                </div>
-                <div class="block-room">
-                  <template v-if="getMode(getBlock(hour, day).code) === 'online'">
-                    <Video :size="10" /> Online
-                  </template>
-                  <template v-else>
-                    <MapPin :size="10" /> {{ getBlock(hour, day).room }}
-                  </template>
-                </div>
+  <div class="timetable-grid-container">
+    <!-- Mobile scroll hint -->
+    <div class="timetable-scroll-hint">
+      <div class="hint-content">
+        <ArrowLeftRight :size="13" class="hint-icon" />
+        <span>Swipe sideways to explore all days</span>
+      </div>
+      <span class="hint-days-pill">Mon – Fri</span>
+    </div>
+
+    <div
+      class="timetable-wrapper"
+      ref="scrollContainer"
+      :class="{ 'is-scrolled-x': isScrolledX }"
+      @scroll.passive="onScroll"
+    >
+      <table class="timetable">
+        <thead>
+          <tr>
+            <th class="time-header-cell">Time</th>
+            <th
+              v-for="day in days"
+              :key="day"
+              :class="['day-header-cell', { 'is-today': day === todayDayCode }]"
+            >
+              <div class="day-header-content">
+                <span class="day-header-name">{{ dayAbbrev[day] }}</span>
+                <span v-if="day === todayDayCode" class="today-indicator">Today</span>
               </div>
-            </td>
-            <td v-else-if="!isOccupied(hour, day)"></td>
-          </template>
-        </tr>
-      </tbody>
-    </table>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="hour in hours" :key="hour">
+            <td class="time-cell">{{ formatTimeLabel(hour) }}</td>
+            <template v-for="day in days" :key="day">
+              <td
+                v-if="getBlock(hour, day)"
+                :rowspan="getBlock(hour, day).rowSpan"
+                :class="['grid-cell', { 'is-today-col': day === todayDayCode }]"
+              >
+                <div
+                  class="timetable-block"
+                  :class="[getBlock(hour, day).blockClass, { 'is-online': getMode(getBlock(hour, day).code) === 'online' }]"
+                  @click="$emit('openModal', getBlock(hour, day).code, day)"
+                  role="button"
+                  tabindex="0"
+                  title="Tap to view full class details"
+                >
+                  <div class="block-top-row">
+                    <span class="block-code">{{ getBlock(hour, day).code }}</span>
+                    <div class="timetable-mode-badge" :class="getMode(getBlock(hour, day).code) === 'online' ? 'online' : 'f2f'">
+                      <template v-if="getMode(getBlock(hour, day).code) === 'online'">
+                        <Globe :size="9" /> Online
+                      </template>
+                      <template v-else>
+                        <School :size="9" /> F2F
+                      </template>
+                    </div>
+                  </div>
+                  <div class="block-name">{{ getBlock(hour, day).name }}</div>
+                  <div class="block-prof">{{ getBlock(hour, day).instructor }}</div>
+                  <div class="block-room">
+                    <template v-if="getMode(getBlock(hour, day).code) === 'online'">
+                      <Video :size="10" /> Online
+                    </template>
+                    <template v-else>
+                      <MapPin :size="10" /> {{ getBlock(hour, day).room }}
+                    </template>
+                  </div>
+                </div>
+              </td>
+              <td
+                v-else-if="!isOccupied(hour, day)"
+                :class="['grid-cell empty-cell', { 'is-today-col': day === todayDayCode }]"
+              ></td>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { Globe, School, Video, MapPin } from '@lucide/vue'
-import { subjects, dayList } from '../../data/schedule.js'
+import { ref, computed, onMounted } from 'vue'
+import { Globe, School, Video, MapPin, ArrowLeftRight } from '@lucide/vue'
+import { subjects, dayList, dayAbbrev, dayShort } from '../../data/schedule.js'
 import { useSubjectModes } from '../../composables/useSubjectModes.js'
 
 defineEmits(['openModal'])
 
 const { getMode } = useSubjectModes()
 const days = dayList
-const hours = Array.from({ length: 9 }, (_, i) => 7 + i) // 7 AM to 3 PM
+const hours = Array.from({ length: 9 }, (_, i) => 7 + i) // 7 AM to 3 PM (ends at 4 PM)
+
+const scrollContainer = ref(null)
+const isScrolledX = ref(false)
+
+function onScroll(e) {
+  isScrolledX.value = (e.target.scrollLeft > 6)
+}
+
+onMounted(() => {
+  if (scrollContainer.value) {
+    isScrolledX.value = scrollContainer.value.scrollLeft > 6
+  }
+})
+
+// Today's day code
+const todayDayCode = computed(() => {
+  const dayNum = new Date().getDay()
+  return dayShort[dayNum] || null
+})
 
 // Pre-compute blocks and occupied cells
 const blocks = computed(() => {
