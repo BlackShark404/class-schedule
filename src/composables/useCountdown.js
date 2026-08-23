@@ -1,103 +1,128 @@
 import { ref, onMounted, onUnmounted } from 'vue'
-import { subjects, dayShort, formatHour } from '../data/schedule.js'
+import { subjects, dayShort, dayNames, formatHour } from '../data/schedule.js'
 import { useSubjectModes } from './useSubjectModes.js'
 
 export function useCountdown() {
   const { getMode } = useSubjectModes()
-  const state = ref('free') // 'ongoing' | 'upcoming' | 'free' | 'done'
+  const state = ref('upcoming') // 'ongoing' | 'upcoming'
+  const statusLabel = ref('Up Next')
   const currentClass = ref(null)
+  const days = ref(0)
   const hours = ref(0)
   const minutes = ref(0)
   const seconds = ref(0)
   const detail = ref('')
   let timer = null
 
-  function getTodaySchedules() {
-    const today = new Date().getDay()
-    const todayCode = dayShort[today]
-    if (!todayCode) return []
+  function getNextClassInfo() {
+    const now = new Date()
+    const currentDay = now.getDay()
 
-    const result = []
-    subjects.forEach(sub => {
-      const mode = getMode(sub.code)
-      sub.schedules.forEach(sched => {
-        if (sched.day === todayCode) {
-          result.push({
-            code: sub.code,
-            name: sub.name,
-            instructor: sub.instructor,
-            room: sched.room,
-            time: sched.time,
-            startHour: sched.startHour,
-            startMin: sched.startMin || 0,
-            endHour: sched.endHour,
-            endMin: sched.endMin || 0,
-            theme: sub.theme,
-            mode
-          })
-        }
+    for (let offset = 0; offset <= 7; offset++) {
+      const targetDayIndex = (currentDay + offset) % 7
+      const targetDayCode = dayShort[targetDayIndex]
+      if (!targetDayCode) continue
+
+      const dayClasses = []
+      subjects.forEach(sub => {
+        const mode = getMode(sub.code)
+        sub.schedules.forEach(sched => {
+          if (sched.day === targetDayCode) {
+            dayClasses.push({
+              code: sub.code,
+              name: sub.name,
+              instructor: sub.instructor,
+              room: sched.room,
+              time: sched.time,
+              startHour: sched.startHour,
+              startMin: sched.startMin || 0,
+              endHour: sched.endHour,
+              endMin: sched.endMin || 0,
+              day: sched.day,
+              dayFull: sched.dayFull,
+              theme: sub.theme,
+              mode
+            })
+          }
+        })
       })
-    })
-    return result.sort((a, b) => (a.startHour * 60 + a.startMin) - (b.startHour * 60 + b.startMin))
+
+      dayClasses.sort((a, b) => (a.startHour * 60 + a.startMin) - (b.startHour * 60 + b.startMin))
+
+      for (const item of dayClasses) {
+        const targetDate = new Date(now)
+        targetDate.setDate(now.getDate() + offset)
+        targetDate.setHours(item.startHour, item.startMin, 0, 0)
+
+        const endDate = new Date(now)
+        endDate.setDate(now.getDate() + offset)
+        endDate.setHours(item.endHour, item.endMin, 0, 0)
+
+        if (offset === 0) {
+          // Today: check if class is currently in session
+          if (now >= targetDate && now < endDate) {
+            return {
+              type: 'ongoing',
+              item,
+              targetTime: endDate,
+              statusLabel: 'In Progress',
+              dayOffset: 0
+            }
+          }
+          // Today: check if class is coming up later today
+          if (now < targetDate) {
+            return {
+              type: 'upcoming',
+              item,
+              targetTime: targetDate,
+              statusLabel: 'Up Next · Today',
+              dayOffset: 0
+            }
+          }
+        } else {
+          // Future upcoming day
+          const label = offset === 1 ? 'Up Next · Tomorrow' : `Up Next · ${item.dayFull}`
+          return {
+            type: 'upcoming',
+            item,
+            targetTime: targetDate,
+            statusLabel: label,
+            dayOffset: offset
+          }
+        }
+      }
+    }
+    return null
   }
 
   function update() {
+    const nextInfo = getNextClassInfo()
+    if (!nextInfo) return
+
     const now = new Date()
-    const currentMin = now.getHours() * 60 + now.getMinutes()
-    const todaySchedules = getTodaySchedules()
+    const diffMs = Math.max(0, nextInfo.targetTime.getTime() - now.getTime())
+    const totalSec = Math.floor(diffMs / 1000)
 
-    if (todaySchedules.length === 0) {
-      state.value = 'free'
-      currentClass.value = null
-      return
+    days.value = Math.floor(totalSec / 86400)
+    hours.value = Math.floor((totalSec % 86400) / 3600)
+    minutes.value = Math.floor((totalSec % 3600) / 60)
+    seconds.value = totalSec % 60
+
+    state.value = nextInfo.type
+    statusLabel.value = nextInfo.statusLabel
+    currentClass.value = nextInfo.item
+
+    const isOnline = nextInfo.item.mode === 'online'
+    const locHtml = isOnline
+      ? `<span class="mode-tag-online">Online (${nextInfo.item.room})</span>`
+      : nextInfo.item.room
+
+    if (nextInfo.type === 'ongoing') {
+      detail.value = `${nextInfo.item.code} · ${nextInfo.item.instructor} · ${locHtml} · Ends at ${formatHour(nextInfo.item.endHour, nextInfo.item.endMin)}`
+    } else {
+      const dayPrefix = nextInfo.dayOffset === 0 ? 'Starts today at' : `Starts ${nextInfo.item.dayFull} at`
+      detail.value = `${nextInfo.item.code} · ${nextInfo.item.instructor} · ${locHtml} · ${dayPrefix} ${formatHour(nextInfo.item.startHour, nextInfo.item.startMin)}`
     }
-
-    // Check for ongoing class
-    const ongoing = todaySchedules.find(s => {
-      const start = s.startHour * 60 + s.startMin
-      const end = s.endHour * 60 + s.endMin
-      return currentMin >= start && currentMin < end
-    })
-
-    if (ongoing) {
-      state.value = 'ongoing'
-      currentClass.value = ongoing
-      const endMin = ongoing.endHour * 60 + ongoing.endMin
-      const diff = endMin - currentMin
-      hours.value = Math.floor(diff / 60)
-      minutes.value = diff % 60
-      seconds.value = 59 - now.getSeconds()
-      const isOnline = ongoing.mode === 'online'
-      detail.value = `${ongoing.code} · ${ongoing.instructor} · ${isOnline ? '<span class="mode-tag-online">Online (' + ongoing.room + ')</span>' : ongoing.room} · Ends at ${formatHour(ongoing.endHour, ongoing.endMin)}`
-      return
-    }
-
-    // Check for next upcoming class
-    const upcoming = todaySchedules.find(s => {
-      const start = s.startHour * 60 + s.startMin
-      return currentMin < start
-    })
-
-    if (upcoming) {
-      state.value = 'upcoming'
-      currentClass.value = upcoming
-      const startMin = upcoming.startHour * 60 + upcoming.startMin
-      const diff = startMin - currentMin
-      const s = now.getSeconds() > 0 ? 60 - now.getSeconds() : 0
-      let m = diff % 60 - (now.getSeconds() > 0 ? 1 : 0)
-      let h = Math.floor(diff / 60)
-      if (m < 0) { m += 60; h -= 1 }
-      hours.value = Math.max(0, h)
-      minutes.value = Math.max(0, m)
-      seconds.value = s
-      const isOnline = upcoming.mode === 'online'
-      detail.value = `${upcoming.code} · ${upcoming.instructor} · ${isOnline ? '<span class="mode-tag-online">Online (' + upcoming.room + ')</span>' : upcoming.room} · Starts at ${formatHour(upcoming.startHour, upcoming.startMin)}`
-      return
-    }
-
-    // All classes done
-    state.value = 'done'
-    currentClass.value = null
   }
 
   onMounted(() => {
@@ -109,5 +134,5 @@ export function useCountdown() {
     if (timer) clearInterval(timer)
   })
 
-  return { state, currentClass, hours, minutes, seconds, detail, update, getTodaySchedules }
+  return { state, statusLabel, currentClass, days, hours, minutes, seconds, detail, update }
 }
