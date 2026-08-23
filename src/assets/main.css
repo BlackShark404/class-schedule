@@ -361,14 +361,14 @@ html.light .today-indicator { background: #0984e3; color: #ffffff; }
 html.light .timetable tbody td.is-today-col { background: rgba(9, 132, 227, 0.025); }
 
 /* Solid background and shadow when scrolled horizontally */
-.timetable-wrapper.is-scrolled-x .timetable thead th { background: #14141e; }
-html.light .timetable-wrapper.is-scrolled-x .timetable thead th { background: #f4f4f8; }
+.timetable-wrapper.is-scrolled-x .timetable thead th { background: rgba(18, 18, 26, 0.85); }
+html.light .timetable-wrapper.is-scrolled-x .timetable thead th { background: rgba(255, 255, 255, 0.85); }
 
-.timetable-wrapper.is-scrolled-x .timetable thead th.time-header-cell { background: #14141e; border-right-color: rgba(255, 255, 255, 0.15); box-shadow: 4px 0 16px rgba(0, 0, 0, 0.55); }
-html.light .timetable-wrapper.is-scrolled-x .timetable thead th.time-header-cell { background: #ececf3; border-right-color: rgba(0, 0, 0, 0.12); box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08); }
+.timetable-wrapper.is-scrolled-x .timetable thead th.time-header-cell { background: rgba(18, 18, 26, 0.85); border-right-color: rgba(255, 255, 255, 0.12); box-shadow: 4px 0 16px rgba(0, 0, 0, 0.25); }
+html.light .timetable-wrapper.is-scrolled-x .timetable thead th.time-header-cell { background: rgba(255, 255, 255, 0.85); border-right-color: rgba(0, 0, 0, 0.08); box-shadow: 4px 0 12px rgba(0, 0, 0, 0.05); }
 
-.timetable-wrapper.is-scrolled-x .timetable tbody td.time-cell { background: #14141e; border-right-color: rgba(255, 255, 255, 0.15); box-shadow: 4px 0 16px rgba(0, 0, 0, 0.55); }
-html.light .timetable-wrapper.is-scrolled-x .timetable tbody td.time-cell { background: #ececf3; border-right-color: rgba(0, 0, 0, 0.12); box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08); }
+.timetable-wrapper.is-scrolled-x .timetable tbody td.time-cell { background: rgba(18, 18, 26, 0.85); border-right-color: rgba(255, 255, 255, 0.12); box-shadow: 4px 0 16px rgba(0, 0, 0, 0.25); }
+html.light .timetable-wrapper.is-scrolled-x .timetable tbody td.time-cell { background: rgba(255, 255, 255, 0.85); border-right-color: rgba(0, 0, 0, 0.08); box-shadow: 4px 0 12px rgba(0, 0, 0, 0.05); }
 
 .timetable-block { padding: 8px 10px; border-radius: var(--radius-sm); font-size: 11px; line-height: 1.35; cursor: pointer; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); height: 100%; display: flex; flex-direction: column; justify-content: flex-start; user-select: none; -webkit-tap-highlight-color: transparent; }
 .timetable-block:hover { transform: translateY(-1px) scale(1.01); z-index: 5; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35); }
