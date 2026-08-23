@@ -599,6 +599,20 @@ html.light .modal-action-btn.secondary { background: rgba(0, 0, 0, 0.04); border
   .fee-item { padding: 12px 16px; }
   .fee-name { font-size: 13px; }
   .fee-amount { font-size: 13px; }
+
+  /* Mobile Timeline */
+  .timeline-day-selector { margin-bottom: 16px; }
+  .timeline-day-btn { min-width: 50px; padding: 8px 10px; font-size: 12px; }
+  .timeline-item { gap: 10px; }
+  .timeline-time-rail { width: 56px; }
+  .timeline-start-time { font-size: 11.5px; white-space: nowrap; }
+  .timeline-duration-badge { font-size: 9.5px; padding: 1px 4px; }
+  .timeline-end-time { display: none; }
+  .timeline-line { min-height: 20px; }
+  .timeline-card { padding: 12px 14px; border-radius: var(--radius-md); }
+  .timeline-card-title { font-size: 13.5px; margin-bottom: 8px; }
+  .timeline-card-meta { gap: 10px; font-size: 11.5px; }
+  .timeline-card-code { font-size: 12px; }
 }
 
 @media (max-width: 480px) {
@@ -616,6 +630,13 @@ html.light .modal-action-btn.secondary { background: rgba(0, 0, 0, 0.04); border
   .countdown-unit-value { font-size: 20px; }
   .total-card { padding: 24px; }
   .total-card-value { font-size: 28px; }
+
+  /* Extra Small Mobile Timeline */
+  .timeline-item { gap: 8px; }
+  .timeline-time-rail { width: 50px; }
+  .timeline-start-time { font-size: 11px; }
+  .timeline-card { padding: 10px 12px; }
+  .timeline-card-meta { gap: 8px; font-size: 11px; }
 }
 
 @media (max-width: 600px) {
