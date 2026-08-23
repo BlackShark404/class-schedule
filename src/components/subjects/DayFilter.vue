@@ -13,14 +13,29 @@
 
     <div class="filter-actions-group">
       <div class="batch-mode-toggle">
-        <button type="button" class="batch-btn f2f" @click="handleSetAll('f2f')" title="Set all subjects to Face-to-Face">
-          <School :size="13" />
-          <span>All F2F</span>
-        </button>
-        <button type="button" class="batch-btn online" @click="handleSetAll('online')" title="Set all subjects to Online">
-          <Globe :size="13" />
-          <span>All Online</span>
-        </button>
+        <Tooltip>
+          <TooltipTrigger as-child>
+            <button type="button" class="batch-btn f2f" @click="handleSetAll('f2f')" aria-label="Set all subjects to Face-to-Face">
+              <School :size="13" />
+              <span>All F2F</span>
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="top" :side-offset="6">
+            <span>Switch entire schedule to Face-to-Face</span>
+          </TooltipContent>
+        </Tooltip>
+
+        <Tooltip>
+          <TooltipTrigger as-child>
+            <button type="button" class="batch-btn online" @click="handleSetAll('online')" aria-label="Set all subjects to Online">
+              <Globe :size="13" />
+              <span>All Online</span>
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="top" :side-offset="6">
+            <span>Switch entire schedule to Online</span>
+          </TooltipContent>
+        </Tooltip>
       </div>
       <div class="hybrid-summary-badge">
         <template v-if="summary.onlineCount > 0 && summary.f2fCount > 0">
@@ -39,6 +54,7 @@
 
 <script setup>
 import { School, Globe } from '@lucide/vue'
+import { Tooltip, TooltipTrigger, TooltipContent } from '../ui/tooltip'
 import { dayList, dayLabels, dayShort } from '../../data/schedule.js'
 import { useSubjectModes } from '../../composables/useSubjectModes.js'
 import { toast } from 'vue-sonner'

@@ -10,9 +10,16 @@
               <span>·</span>
               <span>{{ subject.section || 'BSIT 4' }}</span>
             </div>
-            <button class="modal-close-btn" @click="close" title="Close (Esc)" aria-label="Close">
-              <X :size="16" />
-            </button>
+            <Tooltip>
+              <TooltipTrigger as-child>
+                <button class="modal-close-btn" @click="close" aria-label="Close">
+                  <X :size="16" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" :side-offset="4">
+                <span>Close (Esc)</span>
+              </TooltipContent>
+            </Tooltip>
           </div>
 
           <div class="modal-title">{{ subject.name }}</div>
@@ -78,6 +85,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { X, Globe, School, User, CalendarDays, Clock, Video, MapPin, Hourglass } from '@lucide/vue'
+import { Tooltip, TooltipTrigger, TooltipContent } from '../ui/tooltip'
 import { subjects } from '../../data/schedule.js'
 import { useSubjectModes } from '../../composables/useSubjectModes.js'
 import { toast } from 'vue-sonner'

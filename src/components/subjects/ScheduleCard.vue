@@ -6,14 +6,29 @@
         <div class="card-top-row">
           <div class="card-code">{{ subject.code }}{{ typeLabel }}</div>
           <div class="mode-toggle" role="group" aria-label="Class Mode">
-            <button type="button" class="mode-btn f2f" :class="{ active: mode === 'f2f' }"
-              @click.stop="handleSetMode('f2f')" title="Set to Face-to-Face (F2F)">
-              <School :size="12" /><span>F2F</span>
-            </button>
-            <button type="button" class="mode-btn online" :class="{ active: mode === 'online' }"
-              @click.stop="handleSetMode('online')" title="Set to Online">
-              <Globe :size="12" /><span>Online</span>
-            </button>
+            <Tooltip>
+              <TooltipTrigger as-child>
+                <button type="button" class="mode-btn f2f" :class="{ active: mode === 'f2f' }"
+                  @click.stop="handleSetMode('f2f')" aria-label="Set to Face-to-Face">
+                  <School :size="12" /><span>F2F</span>
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="top" :side-offset="6">
+                <span>Set to Face-to-Face</span>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger as-child>
+                <button type="button" class="mode-btn online" :class="{ active: mode === 'online' }"
+                  @click.stop="handleSetMode('online')" aria-label="Set to Online">
+                  <Globe :size="12" /><span>Online</span>
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="top" :side-offset="6">
+                <span>Set to Online</span>
+              </TooltipContent>
+            </Tooltip>
           </div>
         </div>
         <div class="card-title">{{ subject.name }}</div>
@@ -51,6 +66,7 @@
 <script setup>
 import { computed } from 'vue'
 import { School, Globe, User, Clock, CalendarDays, MapPin, Video } from '@lucide/vue'
+import { Tooltip, TooltipTrigger, TooltipContent } from '../ui/tooltip'
 import { useSubjectModes } from '../../composables/useSubjectModes.js'
 import { toast } from 'vue-sonner'
 

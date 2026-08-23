@@ -1,42 +1,44 @@
 <template>
-  <BackgroundEffects />
+  <TooltipProvider :delay-duration="150">
+    <BackgroundEffects />
 
-  <div class="container">
-    <PwaBanner @toast="showToast" />
-    <AppHeader @toast="showToast" />
-    <CountdownBanner />
-    <NavTabs v-model="activeView" />
-    <StatsRow />
+    <div class="container">
+      <PwaBanner @toast="showToast" />
+      <AppHeader @toast="showToast" />
+      <CountdownBanner />
+      <NavTabs v-model="activeView" />
+      <StatsRow />
 
-    <!-- Subjects View -->
-    <div class="view-section" :class="{ active: activeView === 'cards' }">
-      <TodaySection />
-      <DayFilter v-model="dayFilter" />
-      <ScheduleGrid :filter="dayFilter" />
+      <!-- Subjects View -->
+      <div class="view-section" :class="{ active: activeView === 'cards' }">
+        <TodaySection />
+        <DayFilter v-model="dayFilter" />
+        <ScheduleGrid :filter="dayFilter" />
+      </div>
+
+      <!-- Timetable View -->
+      <div class="view-section" :class="{ active: activeView === 'timetable' }">
+        <TimetableView @open-modal="openModal" />
+      </div>
+
+      <!-- Fees View -->
+      <div class="view-section" :class="{ active: activeView === 'fees' }">
+        <FeesView />
+      </div>
+
+      <AppFooter />
     </div>
 
-    <!-- Timetable View -->
-    <div class="view-section" :class="{ active: activeView === 'timetable' }">
-      <TimetableView @open-modal="openModal" />
-    </div>
+    <SubjectModal
+      :subject-code="modalCode"
+      :day="modalDay"
+      :is-open="modalOpen"
+      @close="modalOpen = false"
+      @jump-to-cards="jumpToCards"
+    />
 
-    <!-- Fees View -->
-    <div class="view-section" :class="{ active: activeView === 'fees' }">
-      <FeesView />
-    </div>
-
-    <AppFooter />
-  </div>
-
-  <SubjectModal
-    :subject-code="modalCode"
-    :day="modalDay"
-    :is-open="modalOpen"
-    @close="modalOpen = false"
-    @jump-to-cards="jumpToCards"
-  />
-
-  <Toaster position="bottom-center" theme="dark" richColors />
+    <Toaster position="bottom-center" theme="dark" richColors />
+  </TooltipProvider>
 </template>
 
 <script setup>
@@ -44,6 +46,7 @@ import { ref, onMounted, watch } from 'vue'
 import { dayShort } from './data/schedule.js'
 import { Toaster, toast } from 'vue-sonner'
 import 'vue-sonner/style.css'
+import { TooltipProvider } from './components/ui/tooltip'
 
 import BackgroundEffects from './components/layout/BackgroundEffects.vue'
 import AppHeader from './components/layout/AppHeader.vue'

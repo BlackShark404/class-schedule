@@ -15,14 +15,29 @@
         <div class="semester-badge">1st Semester · SY 2026–2027</div>
       </div>
       <div class="header-controls">
-        <button class="notif-toggle" :class="{ active: notifEnabled }" @click="handleNotifToggle" title="Class Reminders">
-          <Bell v-if="notifEnabled" :size="18" />
-          <BellOff v-else :size="18" />
-        </button>
-        <button class="theme-toggle" @click="handleThemeToggle" :title="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
-          <Sun v-if="!isDark" :size="18" />
-          <Moon v-else :size="18" />
-        </button>
+        <Tooltip>
+          <TooltipTrigger as-child>
+            <button class="notif-toggle" :class="{ active: notifEnabled }" @click="handleNotifToggle" aria-label="Class Reminders">
+              <Bell v-if="notifEnabled" :size="18" />
+              <BellOff v-else :size="18" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" :side-offset="6">
+            <span>{{ notifEnabled ? 'Reminders Active (15m before class)' : 'Enable Class Reminders' }}</span>
+          </TooltipContent>
+        </Tooltip>
+
+        <Tooltip>
+          <TooltipTrigger as-child>
+            <button class="theme-toggle" @click="handleThemeToggle" aria-label="Toggle Theme">
+              <Sun v-if="!isDark" :size="18" />
+              <Moon v-else :size="18" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" :side-offset="6">
+            <span>{{ isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}</span>
+          </TooltipContent>
+        </Tooltip>
       </div>
     </div>
     <div class="hero">
@@ -43,6 +58,7 @@
 
 <script setup>
 import { Moon, Sun, Bell, BellOff, GraduationCap } from '@lucide/vue'
+import { Tooltip, TooltipTrigger, TooltipContent } from '../ui/tooltip'
 import { useTheme } from '../../composables/useTheme.js'
 import { useNotifications } from '../../composables/useNotifications.js'
 import { toast } from 'vue-sonner'

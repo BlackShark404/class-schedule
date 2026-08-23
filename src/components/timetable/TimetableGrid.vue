@@ -49,19 +49,26 @@
                   title="Tap to view full class details"
                 >
                   <div class="block-top-row">
-                    <span class="block-code" :title="getBlock(hour, day).code">{{ getBlock(hour, day).code }}</span>
-                    <div
-                      class="timetable-mode-badge"
-                      :class="getMode(getBlock(hour, day).code) === 'online' ? 'online' : 'f2f'"
-                      :title="getMode(getBlock(hour, day).code) === 'online' ? 'Online Class' : 'Face-to-Face Class'"
-                    >
-                      <template v-if="getMode(getBlock(hour, day).code) === 'online'">
-                        <Globe :size="10" /> <span class="badge-mode-text">Online</span>
-                      </template>
-                      <template v-else>
-                        <School :size="10" /> <span class="badge-mode-text">F2F</span>
-                      </template>
-                    </div>
+                    <span class="block-code">{{ getBlock(hour, day).code }}</span>
+                    <Tooltip>
+                      <TooltipTrigger as-child>
+                        <div
+                          class="timetable-mode-badge"
+                          :class="getMode(getBlock(hour, day).code) === 'online' ? 'online' : 'f2f'"
+                          @click.stop
+                        >
+                          <template v-if="getMode(getBlock(hour, day).code) === 'online'">
+                            <Globe :size="10" /> <span class="badge-mode-text">Online</span>
+                          </template>
+                          <template v-else>
+                            <School :size="10" /> <span class="badge-mode-text">F2F</span>
+                          </template>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" :side-offset="4">
+                        <span>{{ getMode(getBlock(hour, day).code) === 'online' ? '🌐 Online Class (Virtual)' : '🏛 Face-to-Face Class (Campus)' }}</span>
+                      </TooltipContent>
+                    </Tooltip>
                   </div>
                   <div class="block-name">{{ getBlock(hour, day).name }}</div>
                   <div class="block-prof">{{ getBlock(hour, day).instructor }}</div>
@@ -90,6 +97,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { Globe, School, Video, MapPin, ArrowLeftRight } from '@lucide/vue'
+import { Tooltip, TooltipTrigger, TooltipContent } from '../ui/tooltip'
 import { subjects, dayList, dayAbbrev, dayShort } from '../../data/schedule.js'
 import { useSubjectModes } from '../../composables/useSubjectModes.js'
 
