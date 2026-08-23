@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* ─── Global Icon Alignment ─── */
+svg {
+  display: inline-block;
+  vertical-align: -0.125em;
+}
+
 /* ─── Google Fonts (loaded via index.html preconnect) ─── */
 
 /* ─── CSS Custom Properties ─── */
