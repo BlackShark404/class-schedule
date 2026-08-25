@@ -10,6 +10,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: 'script',
       includeAssets: ['ctu-logo.png'],
       manifest: {
         name: 'Class Schedule — BSIT 4 · Day IV-A',
