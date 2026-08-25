@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, nextTick, onMounted, watch } from 'vue'
 import { dayShort } from './data/schedule.js'
 import { Toaster, toast } from 'vue-sonner'
 import 'vue-sonner/style.css'
@@ -80,9 +80,12 @@ const modalCode = ref('')
 const modalDay = ref('')
 
 function openModal(code, day) {
-  modalCode.value = code
-  modalDay.value = day
-  modalOpen.value = true
+  modalOpen.value = false
+  nextTick(() => {
+    modalCode.value = code
+    modalDay.value = day
+    modalOpen.value = true
+  })
 }
 
 function jumpToCards(code, day) {

@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <div v-if="isOpen" class="modal-backdrop open" @click.self="close">
+    <div v-if="isOpen" class="modal-backdrop open" @mousedown.self="close">
       <div class="modal-dialog" :class="`theme-${subject?.theme}`" role="dialog" aria-modal="true">
         <div class="modal-top-accent"></div>
         <div class="modal-body" v-if="subject && schedule">
