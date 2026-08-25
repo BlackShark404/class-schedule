@@ -80,6 +80,7 @@ const mode = computed(() => getMode(props.subject.code))
 const typeLabel = computed(() => props.subject.type ? ` · ${props.subject.type}` : '')
 
 function handleSetMode(newMode) {
+  if (mode.value === newMode) return
   setMode(props.subject.code, newMode)
   if (newMode === 'online') {
     toast(`Set to Online: ${props.subject.code}`, { description: 'Classes will be held virtually' })

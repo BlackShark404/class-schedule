@@ -66,6 +66,10 @@ const { setAllModes, summary } = useSubjectModes()
 const todayCode = dayShort[new Date().getDay()]
 
 function handleSetAll(mode) {
+  const allAlready = mode === 'online'
+    ? summary.value.onlineCount === (summary.value.onlineCount + summary.value.f2fCount)
+    : summary.value.f2fCount === (summary.value.onlineCount + summary.value.f2fCount)
+  if (allAlready) return
   setAllModes(mode)
   if (mode === 'online') {
     toast.success('All set to Online', { description: 'Your schedule has been updated to fully virtual.' })

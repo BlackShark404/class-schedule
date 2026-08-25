@@ -109,6 +109,7 @@ const isOnline = computed(() => subject.value ? getMode(subject.value.code) === 
 
 function handleSetMode(newMode) {
   if (!subject.value) return
+  if (getMode(subject.value.code) === newMode) return
   setMode(subject.value.code, newMode)
   if (newMode === 'online') {
     toast(`Set to Online: ${subject.value.code}`, { description: 'Classes will be held virtually' })
