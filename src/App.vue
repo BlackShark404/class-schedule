@@ -80,12 +80,9 @@ const modalCode = ref('')
 const modalDay = ref('')
 
 function openModal(code, day) {
-  modalOpen.value = false
-  nextTick(() => {
-    modalCode.value = code
-    modalDay.value = day
-    modalOpen.value = true
-  })
+  modalCode.value = code
+  modalDay.value = day
+  modalOpen.value = true
 }
 
 function jumpToCards(code, day) {
