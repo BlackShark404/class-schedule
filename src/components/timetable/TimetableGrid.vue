@@ -6,7 +6,7 @@
         <ArrowLeftRight :size="13" class="hint-icon" />
         <span>Swipe sideways to explore all days</span>
       </div>
-      <span class="hint-days-pill">Mon – Fri</span>
+      <span class="hint-days-pill">Mon – Sat</span>
     </div>
 
     <div

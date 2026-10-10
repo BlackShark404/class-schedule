@@ -85,12 +85,12 @@ export const subjects = [
   }
 ]
 
-export const dayMap = { M: 1, T: 2, W: 3, Th: 4, F: 5 }
+export const dayMap = { M: 1, T: 2, W: 3, Th: 4, F: 5, Sat: 6 }
 export const dayNames = { 0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday' }
-export const dayShort = { 1: 'M', 2: 'T', 3: 'W', 4: 'Th', 5: 'F' }
-export const dayList = ['M', 'T', 'W', 'Th', 'F']
-export const dayLabels = { M: 'Monday', T: 'Tuesday', W: 'Wednesday', Th: 'Thursday', F: 'Friday' }
-export const dayAbbrev = { M: 'Mon', T: 'Tue', W: 'Wed', Th: 'Thu', F: 'Fri' }
+export const dayShort = { 1: 'M', 2: 'T', 3: 'W', 4: 'Th', 5: 'F', 6: 'Sat' }
+export const dayList = ['M', 'T', 'W', 'Th', 'F', 'Sat']
+export const dayLabels = { M: 'Monday', T: 'Tuesday', W: 'Wednesday', Th: 'Thursday', F: 'Friday', Sat: 'Saturday' }
+export const dayAbbrev = { M: 'Mon', T: 'Tue', W: 'Wed', Th: 'Thu', F: 'Fri', Sat: 'Sat' }
 
 export const fees = [
   { name: 'Tuition (CCICT)', amount: 2550 },

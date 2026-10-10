@@ -23,8 +23,8 @@
         <span class="stat-label">Schedule</span>
         <div class="stat-icon"><Calendar :size="15" /></div>
       </div>
-      <div class="stat-value accent-3">M–F</div>
-      <div class="stat-subtitle">Mon to Fri (5 Days)</div>
+      <div class="stat-value accent-3">M–Sat</div>
+      <div class="stat-subtitle">Mon to Sat (6 Days)</div>
     </div>
 
     <div class="stat-card stat-green">
